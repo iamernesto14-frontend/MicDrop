@@ -1,0 +1,10 @@
+.theme-toggle {
+    cursor: pointer;
+    padding: 3px;
+
+        &:hover {
+            color: rgba(37, 99, 235, 1);
+            background-color: var(--accent);
+            border-radius: 5px;
+        } 
+}
