@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { HeaderComponent } from '../../../shared/components/header/header.component';
 
 @Component({
   selector: 'app-playlists',
-  imports: [],
+  imports: [HeaderComponent],
   templateUrl: './playlists.component.html',
   styleUrl: './playlists.component.scss'
 })

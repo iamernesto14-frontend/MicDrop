@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+@use '../src/styles/reset' as *;
+@use '../src/styles/variables' as *;
+@use '../src/styles/mixins' as *;
+
+body {
+    font-family: var(--font-sans);
+}
