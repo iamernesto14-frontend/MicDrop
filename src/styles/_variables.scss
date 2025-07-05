@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
   --background: hsl(0, 0%, 100%);
   --foreground: hsl(222.2, 84%, 4.9%);
+  --background-rgb: rgb(255, 255, 255);
 
   --card: hsl(0, 0%, 100%);
   --card-foreground: hsl(222.2, 84%, 4.9%);
@@ -37,11 +40,16 @@
   --sidebar-accent-foreground: hsl(240, 5.9%, 10%);
   --sidebar-border: hsl(220, 13%, 91%);
   --sidebar-ring: hsl(217.2, 91.2%, 59.8%);
+
+  // fonts
+  --font-sans: 'Noto Sans', sans-serif;
 }
+
 
 [data-theme="dark"] {
   --background: hsl(222.2, 84%, 4.9%);
   --foreground: hsl(210, 40%, 98%);
+  --background-rgb: rgb(34, 34, 34);
 
   --card: hsl(222.2, 84%, 4.9%);
   --card-foreground: hsl(210, 40%, 98%);
