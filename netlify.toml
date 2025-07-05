@@ -6,4 +6,4 @@ publish = "dist/micdrop/browser"
 package = "@netlify/angular-runtime"
 
   [plugins.inputs]
-  fontInlineLimit = 20
+  inlineFonts = false
