@@ -12,5 +12,9 @@
       [size]="24"
       [strokeWidth]="2"
     ></lucide-angular>
+  
+    <span class="theme-label" *ngIf="showLabel">
+      {{ (theme$ | async) === 'dark' ? 'Dark Theme' : 'Light Theme' }}
+    </span>
   </div>
   
