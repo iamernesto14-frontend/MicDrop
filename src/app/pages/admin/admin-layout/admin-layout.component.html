@@ -5,4 +5,8 @@
   <router-outlet></router-outlet>
 </div>
 
-<app-mobile-admin-menu class="mobile-only"></app-mobile-admin-menu>
+<app-mobile-admin-menu
+  class="scroll-aware-menu"
+  [menuItems]="menuItems"
+  [ngClass]="{ hide: isScrollingDown, show: !isScrollingDown }"
+></app-mobile-admin-menu>
