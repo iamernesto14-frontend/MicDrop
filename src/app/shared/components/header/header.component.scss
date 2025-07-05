@@ -45,12 +45,32 @@ header {
 
   .login {
     @include flex(row, center, center);
-    gap: 0.5rem;
+
+    .moon {
+        cursor: pointer;
+        padding: 3px;
+        
+        
+        &:hover {
+            color: rgba(37, 99, 235, 1);
+            background-color: var(--accent);
+            border-radius: 5px;
+        }
+    }
+    gap: 1rem;
 
     .login-link {
       color: var(--primary);
       font-weight: 300;
       font-size: 1rem;
+
+      &:hover {
+        color: rgba(37, 99, 235, 1);;
+      }
+    }
+
+    .login-icon {
+      color: var(--primary);
     }
   }
 
