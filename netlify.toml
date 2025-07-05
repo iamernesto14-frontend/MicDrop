@@ -1,6 +1,6 @@
 [build]
 command = "ng build"
-publish = "dist/micdrop/browser"
+publish = "dist/micdrop"
 
 [[plugins]]
 package = "@netlify/angular-runtime"
