@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectTheme } from '../../../store/theme/theme.selectors';
 import { toggleTheme } from '../../../store/theme/theme.actions';
@@ -7,11 +7,14 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-theme-toggle',
+  standalone: true,
   imports: [LucideAngularModule, CommonModule],
   templateUrl: './theme-toggle.component.html',
-  styleUrl: './theme-toggle.component.scss'
+  styleUrl: './theme-toggle.component.scss',
 })
 export class ThemeToggleComponent {
+  @Input() showLabel = false;
+
   readonly Moon = Moon;
   readonly Sun = Sun;
   private store = inject(Store);

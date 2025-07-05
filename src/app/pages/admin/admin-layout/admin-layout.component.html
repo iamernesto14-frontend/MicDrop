@@ -1,12 +1,15 @@
-<app-admin-toolbar></app-admin-toolbar>
-
 <div class="admin-wrapper">
-  <app-sidebar class="desktop-only"></app-sidebar>
-  <router-outlet></router-outlet>
-</div>
-
-<app-mobile-admin-menu
-  class="scroll-aware-menu"
-  [menuItems]="menuItems"
-  [ngClass]="{ hide: isScrollingDown, show: !isScrollingDown }"
-></app-mobile-admin-menu>
+    <app-sidebar class="desktop-only"></app-sidebar>
+  
+    <div class="admin-content">
+      <app-admin-toolbar></app-admin-toolbar>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  
+  <app-mobile-admin-menu
+    class="scroll-aware-menu"
+    [menuItems]="menuItems"
+    [ngClass]="{ hide: isScrollingDown, show: !isScrollingDown }"
+  ></app-mobile-admin-menu>
+  

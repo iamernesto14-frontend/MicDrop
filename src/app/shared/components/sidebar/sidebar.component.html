@@ -1,1 +1,48 @@
-<p>sidebar works!</p>
+<aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-container">
+        <h1 class="logo">
+            <lucide-angular class="logo-icon" [img]="Headphones" [size]="24" [strokeWidth]="2"></lucide-angular>
+            <span>Micdrop</span>
+          </h1>
+          <span class="admin-title">Admin Dashboard</span>
+      </div>
+  
+      <div class="admin-profile">
+        <img [src]="admin.avatar" alt="Profile" class="avatar" />
+        <div class="admin-info">
+          <p class="name">{{ admin.name }}</p>
+          <p class="email">{{ admin.email }}</p>
+        </div>
+      </div>
+    </div>
+    
+    <nav class="nav-links">
+      <a routerLink="/admin" routerLinkActive="active">
+        <lucide-angular [img]="LayoutDashboard" size="20" strokeWidth="2" />
+        <span>Dashboard</span>
+      </a>
+      <a routerLink="/admin/playlists" routerLinkActive="active">
+        <lucide-angular [img]="List" size="20" strokeWidth="2" />
+        <span>Playlists</span>
+      </a>
+      <a routerLink="/admin/confessions" routerLinkActive="active">
+        <lucide-angular [img]="MessageSquare" size="20" strokeWidth="2" />
+        <span>Confessions</span>
+      </a>
+      <a routerLink="/admin/team" routerLinkActive="active">
+        <lucide-angular [img]="Users" size="20" strokeWidth="2" />
+        <span>Team</span>
+      </a>
+    </nav>
+  
+    <div class="sidebar-footer">
+        <app-theme-toggle [showLabel]="true"></app-theme-toggle>
+
+      <button (click)="logout()" class="logout-btn">
+        <lucide-angular [img]="LogOut" size="20" strokeWidth="2" />
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+  
