@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { provideRouter } from '@angular/router';
+import { canActivateAdmin, canMatchAdmin } from './core/guards/auth.guard';
 
 
 export const routes: Routes = [
@@ -40,6 +41,8 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
+    canActivate: [canActivateAdmin], // Guards access to child routes
+    canMatch: [canMatchAdmin],       // Prevents lazy loading when not authenticated
     loadChildren: () =>
       import('./pages/admin/admin.routes').then((m) => m.ADMIN_ROUTES),
   },
