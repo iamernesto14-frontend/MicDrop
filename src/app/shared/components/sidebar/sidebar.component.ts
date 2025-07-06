@@ -39,8 +39,4 @@ export class SidebarComponent {
     avatar: 'https://ui-avatars.com/api/?name=Ernest+Anokye'
   };
 
-  // logout() {
-  //   localStorage.clear();
-  //   location.reload();
-  // }
 }
