@@ -1,10 +1,10 @@
-// signup.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ToastService } from '../../core/services/toast.service'; // Import ToastService
 
 @Component({
   selector: 'app-signup',
@@ -20,7 +20,8 @@ export class SignupComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService // Inject ToastService
   ) {
     this.signupForm = this.fb.group({
       name: ['', Validators.required],
@@ -35,15 +36,17 @@ export class SignupComponent {
 
     const formValue = {
       ...this.signupForm.value,
-      role: 'Admin' // Or 'admin' depending on your use case
+      role: 'Admin' // Adjust as needed
     };
 
     this.authService.register(formValue).subscribe({
       next: () => {
+        this.toastService.show('Registration successful!', 'success');
         this.router.navigate(['/login']);
       },
       error: (error: HttpErrorResponse) => {
-        this.error = error.error?.message || 'Registration failed';
+        const msg = error?.error?.message || 'Registration failed.';
+        this.toastService.show(msg, 'error');
       }
     });
   }

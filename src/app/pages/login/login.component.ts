@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
+import { ToastService } from '../../core/services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,12 @@ import { AuthService } from '../../core/services/auth.service';
 export class LoginComponent {
   loginForm;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private toastService: ToastService 
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
@@ -25,18 +31,22 @@ export class LoginComponent {
     if (this.loginForm.invalid) return;
 
     const { email, password } = this.loginForm.value;
-    this.authService.login({
-      email: email as string,
-      password: password as string,
-    }).subscribe({
-      next: () => this.router.navigate(['/admin']),
+    if (typeof email !== 'string' || typeof password !== 'string') {
+      this.toastService.show('Please enter valid credentials.', 'error');
+      return;
+    }
+    this.authService.login({ email, password }).subscribe({
+      next: () => {
+        this.toastService.show('Login successful!', 'success');
+        this.router.navigate(['/admin']);
+      },
       error: (err) => {
         console.error('Login failed:', err);
-        alert('Invalid credentials.');
+        const msg = err?.error?.message || 'Invalid credentials.';
+        this.toastService.show(msg, 'error');
       },
     });
   }
 
   currentYear = new Date().getFullYear();
-
 }

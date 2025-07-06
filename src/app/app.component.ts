@@ -4,10 +4,11 @@ import { Store } from '@ngrx/store';
 import { loadTheme } from './store/theme/theme.actions';
 import { selectTheme } from './store/theme/theme.selectors';
 import { DOCUMENT } from '@angular/common';
+import { ToastComponent } from './shared/components/toast/toast.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, ToastComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
