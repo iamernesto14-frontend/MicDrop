@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
   LucideAngularModule,
@@ -12,6 +12,10 @@ import {
 } from 'lucide-angular';
 import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 
+import { AuthService } from '../../../core/services/auth.service';
+import { ToastService } from '../../../core/services/toast.service';
+import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
+
 @Component({
   selector: 'app-sidebar',
   standalone: true,
@@ -20,7 +24,8 @@ import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
     RouterLink,
     RouterLinkActive,
     LucideAngularModule,
-    ThemeToggleComponent
+    ThemeToggleComponent,
+    ConfirmModalComponent
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
@@ -33,10 +38,32 @@ export class SidebarComponent {
   readonly LogOut = LogOut;
   readonly Headphones = Headphones;
 
+  showLogoutModal = false;
+
   admin = {
     name: 'Ernest Anokye',
     email: 'eernesto211@gmail.com',
     avatar: 'https://ui-avatars.com/api/?name=Ernest+Anokye'
   };
 
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private toastService: ToastService
+  ) {}
+
+  openLogoutModal() {
+    this.showLogoutModal = true;
+  }
+
+  confirmLogout() {
+    this.authService.logout();
+    this.toastService.show('You have been logged out.', 'info');
+    this.router.navigate(['/login']);
+    this.showLogoutModal = false;
+  }
+
+  cancelLogout() {
+    this.showLogoutModal = false;
+  }
 }

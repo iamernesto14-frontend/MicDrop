@@ -18,31 +18,40 @@
     </div>
     
     <nav class="nav-links">
-      <a routerLink="/admin" routerLinkActive="active">
-        <lucide-angular [img]="LayoutDashboard" size="20" strokeWidth="2" />
-        <span>Dashboard</span>
-      </a>
-      <a routerLink="/admin/playlists" routerLinkActive="active">
-        <lucide-angular [img]="List" size="20" strokeWidth="2" />
-        <span>Playlists</span>
-      </a>
-      <a routerLink="/admin/confessions" routerLinkActive="active">
-        <lucide-angular [img]="MessageSquare" size="20" strokeWidth="2" />
-        <span>Confessions</span>
-      </a>
-      <a routerLink="/admin/team" routerLinkActive="active">
-        <lucide-angular [img]="Users" size="20" strokeWidth="2" />
-        <span>Team</span>
-      </a>
-    </nav>
-  
-    <div class="sidebar-footer">
+        <a routerLink="/admin" routerLinkActive="active">
+          <lucide-angular [img]="LayoutDashboard" size="20" strokeWidth="2" />
+          <span>Dashboard</span>
+        </a>
+        <a routerLink="/admin/playlists" routerLinkActive="active">
+          <lucide-angular [img]="List" size="20" strokeWidth="2" />
+          <span>Playlists</span>
+        </a>
+        <a routerLink="/admin/confessions" routerLinkActive="active">
+          <lucide-angular [img]="MessageSquare" size="20" strokeWidth="2" />
+          <span>Confessions</span>
+        </a>
+        <a routerLink="/admin/team" routerLinkActive="active">
+          <lucide-angular [img]="Users" size="20" strokeWidth="2" />
+          <span>Team</span>
+        </a>
+      </nav>
+    
+      <div class="sidebar-footer">
         <app-theme-toggle [showLabel]="true"></app-theme-toggle>
-
-      <button [routerLink]="['/logout']" class="logout-btn">
-        <lucide-angular [img]="LogOut" size="20" strokeWidth="2" />
-        <span>Logout</span>
-      </button>
-    </div>
+    
+        <button class="logout-btn" (click)="openLogoutModal()">
+          <lucide-angular [img]="LogOut" size="20" strokeWidth="2" />
+          <span>Logout</span>
+        </button>
+      </div>
+    
+      <app-confirm-modal
+        *ngIf="showLogoutModal"
+        [message]="'Are you sure you want to logout?'"
+        [confirmText]="'Logout'"
+        [cancelText]="'Cancel'"
+        (confirmed)="confirmLogout()"
+        (canceled)="cancelLogout()"
+      ></app-confirm-modal>
   </aside>
   
