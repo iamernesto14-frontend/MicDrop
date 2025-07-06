@@ -39,7 +39,7 @@
     <div class="sidebar-footer">
         <app-theme-toggle [showLabel]="true"></app-theme-toggle>
 
-      <button (click)="logout()" class="logout-btn">
+      <button [routerLink]="['/logout']" class="logout-btn">
         <lucide-angular [img]="LogOut" size="20" strokeWidth="2" />
         <span>Logout</span>
       </button>
