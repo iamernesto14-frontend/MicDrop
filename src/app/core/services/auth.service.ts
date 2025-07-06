@@ -8,7 +8,18 @@ import { LoginResponse } from '../../models/auth.model';
 export class AuthService {
   private baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
+  
+  register(data: {
+    name: string;
+    email: string;
+    password: string;
+    password_confirmation: string;
+    role: string;
+  }): Observable<any> {
+    return this.http.post(`${this.baseUrl}/register`, data);
+  }
+  
 
   login(credentials: { email: string; password: string }): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.baseUrl}/login`, credentials).pipe(
