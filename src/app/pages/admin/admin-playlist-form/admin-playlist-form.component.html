@@ -1,1 +1,30 @@
-<p>admin-playlist-form works!</p>
+<div class="team-form-container">
+    <h2>{{ playlist ? 'Edit Playlist' : 'Add Playlist' }}</h2>
+    <form [formGroup]="playlistForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" formControlName="title" placeholder="Enter title" />
+      </div>
+  
+      <div class="form-group">
+        <label>Description</label>
+        <textarea formControlName="description" rows="3" placeholder="Enter description"></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label>Select Episodes</label>
+        <mat-form-field appearance="fill">
+          <mat-select formControlName="episodes" multiple>
+            <mat-option *ngFor="let episode of episodes" [value]="episode.id">
+              {{ episode.title }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+  
+      <button type="submit" [disabled]="playlistForm.invalid">
+        {{ playlist ? 'Update Playlist' : 'Add Playlist' }}
+      </button>
+    </form>
+  </div>
+  

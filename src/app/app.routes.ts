@@ -47,8 +47,8 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
-    canActivate: [canActivateAdmin], // Guards access to child routes
-    canMatch: [canMatchAdmin],       // Prevents lazy loading when not authenticated
+    canActivate: [canActivateAdmin],
+    canMatch: [canMatchAdmin],    
     loadChildren: () =>
       import('./pages/admin/admin.routes').then((m) => m.ADMIN_ROUTES),
   },

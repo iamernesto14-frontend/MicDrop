@@ -13,7 +13,7 @@ import {
 
 @Component({
   selector: 'app-admin-layout',
-  imports: [RouterOutlet, AdminToolbarComponent, SidebarComponent, MobileAdminMenuComponent, CommonModule,],
+  imports: [RouterOutlet, SidebarComponent, MobileAdminMenuComponent, CommonModule,],
   templateUrl: './admin-layout.component.html',
   styleUrl: './admin-layout.component.scss'
 })
