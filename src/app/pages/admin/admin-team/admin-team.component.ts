@@ -5,13 +5,16 @@ import { TeamService } from '../../../core/services/team.service';
 import { CommonModule } from '@angular/common';
 import { AdminTeamFormComponent } from '../admin-team-form/admin-team-form.component';
 import { LucideAngularModule, SquarePen, Trash2, Linkedin, Twitter, Instagram } from 'lucide-angular';
+
 import { ToastService } from '../../../core/services/toast.service';
 import { ConfirmModalComponent } from '../../../shared/components/confirm-modal/confirm-modal.component';
+import { FilterPipe } from '../../../shared/pipes/filter.pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-team',
   standalone: true,
-  imports: [CommonModule, AdminTeamFormComponent, LucideAngularModule, ConfirmModalComponent ],
+  imports: [CommonModule, AdminTeamFormComponent, LucideAngularModule, ConfirmModalComponent, FilterPipe, FormsModule ],
   templateUrl: './admin-team.component.html',
   styleUrl: './admin-team.component.scss'
 })
@@ -19,6 +22,7 @@ export class AdminTeamComponent {
   teamMembers: TeamMember[] = [];
   showForm = false;
   showConfirmModal = false;
+  searchTerm = '';
   editingMember?: TeamMember;
   memberToDelete: TeamMember | null = null;
   readonly SquarePen = SquarePen;

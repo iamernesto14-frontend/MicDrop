@@ -27,8 +27,6 @@ export class AuthService {
         if (res.status === 'success') {
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('user', JSON.stringify(res.data.user));
-  
-          // 👇 For testing purposes ONLY
           console.log('Bearer Token:', res.data.token);
         }
       })

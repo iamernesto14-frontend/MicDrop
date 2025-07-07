@@ -4,11 +4,18 @@
         <h2>Team Management</h2>
         <p>Manage your team members and their roles.</p>
       </div>
+      <input
+  type="text"
+  placeholder="Search by name..."
+  [(ngModel)]="searchTerm"
+  class="search-input"
+/>
+
       <button class="add-btn" (click)="toggleForm()">+ Add Member</button>
     </div>
   
     <div class="team-list">
-      <div class="team-card" *ngFor="let member of teamMembers">
+      <div class="team-card" *ngFor="let member of teamMembers | filter:searchTerm">
         <img [src]="member.profile_image" alt="{{ member.name }}" />
         <div class="card-content">
           <h3>{{ member.name }}</h3>
