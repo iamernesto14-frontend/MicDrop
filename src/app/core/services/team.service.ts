@@ -12,7 +12,20 @@ export class TeamService {
 
   constructor(private http: HttpClient) {}
 
-  getTeamMembers(): Observable<TeamMember[]> {
-    return this.http.get<TeamMember[]>(this.baseUrl);
+  getTeamMembers(): Observable<{ status: string; data: TeamMember[] }> {
+    return this.http.get<{ status: string; data: TeamMember[] }>(this.baseUrl);
   }
+
+  addTeamMember(member: any): Observable<any> {
+    return this.http.post(this.baseUrl, member);
+  }
+
+  deleteTeamMember(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+
+  updateTeamMember(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/${id}`, data);
+  }
+  
 }

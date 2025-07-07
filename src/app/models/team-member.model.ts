@@ -1,13 +1,9 @@
+
 export interface TeamMember {
     id: number;
     name: string;
-    image: string;        
+    profile_image: string;
     bio: string;
-    facebook?: string;
-    twitter?: string;
-    instagram?: string;
-    linkedin?: string;
-    created_at?: string;   
-    updated_at?: string;
+    social_media_links: { platform: string; url: string }[];
+    role: string; // Added role property
   }
-  
