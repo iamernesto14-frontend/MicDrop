@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ToastService } from '../../core/services/toast.service'; // Import ToastService
+import { ToastService } from '../../core/services/toast.service';
 
 @Component({
   selector: 'app-signup',
@@ -21,7 +21,7 @@ export class SignupComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private toastService: ToastService // Inject ToastService
+    private toastService: ToastService 
   ) {
     this.signupForm = this.fb.group({
       name: ['', Validators.required],
@@ -36,7 +36,7 @@ export class SignupComponent {
 
     const formValue = {
       ...this.signupForm.value,
-      role: 'Admin' // Adjust as needed
+      role: 'admin'
     };
 
     this.authService.register(formValue).subscribe({

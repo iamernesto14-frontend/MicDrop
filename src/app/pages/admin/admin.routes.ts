@@ -26,7 +26,15 @@ export const ADMIN_ROUTES: Routes = [
               import('./admin-playlists/admin-playlists.component').then(
                 (m) => m.AdminPlaylistsComponent
               ),
-          },
+            },
+            {
+                path: 'team/new',
+                loadComponent: () =>
+                  import('./admin-team-form/admin-team-form.component').then(
+                    (m) => m.AdminTeamFormComponent
+                  ),
+              }
+,              
           {
             path: 'playlists/new',
             loadComponent: () =>

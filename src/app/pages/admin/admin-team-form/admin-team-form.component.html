@@ -1,1 +1,42 @@
-<p>admin-team-form works!</p>
+  <div class="team-form-container">
+    <h2>{{ member ? 'Edit Team Member' : 'Add Team Member' }}</h2>
+    <form [formGroup]="teamForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" formControlName="name" placeholder="Enter name" />
+      </div>
+  
+      <div class="form-group">
+        <label>Role</label>
+        <input type="text" formControlName="role" placeholder="Enter role (e.g., Host)" />
+      </div>
+  
+      <div class="form-group">
+        <label>Bio</label>
+        <textarea formControlName="bio" rows="3" placeholder="Short biography"></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label>Profile Image URL</label>
+        <input type="text" formControlName="profile_image" placeholder="https://example.com/image.jpg" />
+      </div>
+  
+      <div formGroupName="social_media_links">
+        <label>Social Media Links</label>
+        <div class="form-group">
+          <input type="text" formControlName="linkedin" placeholder="LinkedIn URL" />
+        </div>
+        <div class="form-group">
+          <input type="text" formControlName="twitter" placeholder="Twitter URL" />
+        </div>
+        <div class="form-group">
+          <input type="text" formControlName="instagram" placeholder="Instagram URL" />
+        </div>
+      </div>
+  
+      <button type="submit" [disabled]="teamForm.invalid">
+        {{ member ? 'Update Member' : 'Add Member' }}
+      </button>
+    </form>
+  </div>
+  
