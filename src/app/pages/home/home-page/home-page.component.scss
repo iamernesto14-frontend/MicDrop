@@ -1,3 +1,32 @@
+@use '../../../../styles/variables' as *;
+@use '../../../../styles/mixins' as *;
+
+.latest-episodes {
+    padding: 1rem;
+  
+    .page-title {
+        margin-bottom: 2rem;
+
+        h2 {
+            font-size: 1.75rem;
+            margin-bottom: .8rem;
+            font-weight: 600;
+          }
+
+          p {
+            font-size: 1rem;
+            color: var(--muted-foreground); 
+          }
+    }
+  
+    .episodes-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+  }
+  
+
 .scroll-aware-menu {
     position: fixed;
     bottom: 0;

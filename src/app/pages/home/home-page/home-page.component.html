@@ -5,6 +5,20 @@
   [menuItems]="menuItems"
 ></app-mobile-admin-menu>
 
+<section class="latest-episodes" *ngIf="!loading && episodes.length">
+  <div class="page-title">
+    <h2>Latest Episodes</h2>
+    <p>Discover our most recent conversations</p>
+  </div>
+  <div class="episodes-grid">
+    <app-episode-card
+      *ngFor="let episode of episodes"
+      [episode]="episode"
+    ></app-episode-card>
+  </div>
+</section>
+
+<div *ngIf="loading">Loading episodes...</div>
+<div *ngIf="!loading && error">{{ error }}</div>
+
 <router-outlet></router-outlet>
-
-

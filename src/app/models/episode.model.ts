@@ -1,3 +1,5 @@
+import { Playlist } from "./playlist.model";
+
 export interface Episode {
     id: number;
     title: string;
@@ -15,5 +17,6 @@ export interface Episode {
     slug: string;
     created_at: string;
     updated_at: string;
+    playlists?: Playlist[];
   }
   

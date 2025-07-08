@@ -5,10 +5,11 @@ import { loadTheme } from './store/theme/theme.actions';
 import { selectTheme } from './store/theme/theme.selectors';
 import { DOCUMENT } from '@angular/common';
 import { ToastComponent } from './shared/components/toast/toast.component';
+import { AudioPlayerComponent } from './shared/components/audio-player/audio-player.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ToastComponent],
+  imports: [RouterOutlet, ToastComponent, AudioPlayerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

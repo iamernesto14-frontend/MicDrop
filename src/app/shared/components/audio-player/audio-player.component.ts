@@ -1,11 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { PlayerService } from '../../../core/services/player.service';
+import { Episode } from '../../../models/episode.model';
 
 @Component({
   selector: 'app-audio-player',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './audio-player.component.html',
-  styleUrl: './audio-player.component.scss'
+  styleUrl: './audio-player.component.scss',
 })
-export class AudioPlayerComponent {
+export class AudioPlayerComponent implements OnInit {
+  episode: Episode | null = null;
+  @ViewChild('audio') audioRef!: ElementRef<HTMLAudioElement>;
 
+  constructor(private playerService: PlayerService) {}
+
+  ngOnInit(): void {
+    this.playerService.currentEpisode$.subscribe((episode) => {
+      this.episode = episode;
+      if (this.audioRef && episode) {
+        setTimeout(() => this.audioRef.nativeElement.play(), 0);
+      }
+    });
+  
+    this.playerService.isPlaying$.subscribe((playing) => {
+      if (!this.audioRef) return;
+  
+      if (playing) {
+        this.audioRef.nativeElement.play();
+      } else {
+        this.audioRef.nativeElement.pause();
+      }
+    });
+  }
 }

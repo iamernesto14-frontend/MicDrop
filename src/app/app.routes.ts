@@ -18,13 +18,7 @@ export const routes: Routes = [
     path: 'signup',
     loadComponent: () =>
       import('./pages/signup/signup.component').then((m) => m.SignupComponent),
-    },
-    {
-        path: 'logout',
-        loadComponent: () =>
-          import('./shared/components/logout/logout.component').then((m) => m.LogoutComponent),
-      }
-,      
+  },
   {
     path: 'confessions',
     loadChildren: () =>
@@ -48,7 +42,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     canActivate: [canActivateAdmin],
-    canMatch: [canMatchAdmin],    
+    canMatch: [canMatchAdmin],   
     loadChildren: () =>
       import('./pages/admin/admin.routes').then((m) => m.ADMIN_ROUTES),
   },

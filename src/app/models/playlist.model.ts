@@ -1,5 +1,6 @@
 export interface Playlist {
     id: number;
+    name: string;
     title: string;
     description: string;
     episodes: number[];

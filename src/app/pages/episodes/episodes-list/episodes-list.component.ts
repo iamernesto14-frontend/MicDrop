@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
-import { MobileAdminMenuComponent } from '../../../shared/components/mobile-admin-menu/mobile-admin-menu.component';
 import {
   Home,
   Play,
@@ -11,11 +10,13 @@ import {
 } from 'lucide-angular';
 import { EpisodeService } from '../../../core/services/episode.service';
 import { Episode } from '../../../models/episode.model';
+import { EpisodeCardComponent } from "../../../shared/components/episode-card/episode-card.component";
+import { MobileAdminMenuComponent } from '../../../shared/components/mobile-admin-menu/mobile-admin-menu.component';
 
 @Component({
   selector: 'app-episodes-list',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, MobileAdminMenuComponent],
+  imports: [CommonModule, HeaderComponent, MobileAdminMenuComponent, EpisodeCardComponent],
   templateUrl: './episodes-list.component.html',
   styleUrls: ['./episodes-list.component.scss']
 })

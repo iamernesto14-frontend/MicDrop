@@ -21,3 +21,85 @@
       display: none;
     }
   }
+
+  .episode-detail {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+  
+    .episode-image {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+  
+    .title {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+  
+    .meta {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+  
+    .audio-player {
+      width: 100%;
+      margin: 1rem 0;
+    }
+  
+    .description {
+      margin-top: 1.5rem;
+  
+      h2 {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+      }
+  
+      p {
+        white-space: pre-line;
+      }
+    }
+  
+    .platforms {
+      margin-top: 1.5rem;
+  
+      .platform-link {
+        display: inline-block;
+        margin-right: 1rem;
+        color: #007acc;
+        text-decoration: none;
+  
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  
+    .back-link {
+      display: block;
+      margin-top: 2rem;
+      color: #555;
+      text-decoration: none;
+  
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  
+    .error {
+      color: red;
+      font-weight: bold;
+      padding: 1rem;
+    }
+  
+    .loading {
+      font-style: italic;
+      padding: 1rem;
+      color: #555;
+    }
+  }
+  

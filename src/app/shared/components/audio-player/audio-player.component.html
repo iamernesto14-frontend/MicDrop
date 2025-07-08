@@ -1,1 +1,17 @@
-<p>audio-player works!</p>
+<div *ngIf="episode" class="audio-player-wrapper">
+    <div class="audio-info">
+      <strong class="episode-title">{{ episode.title }}</strong>
+      <span>· Season {{ episode.season }} · Episode {{ episode.episode }}</span>
+    </div>
+  
+    <audio
+      #audio
+      controls
+      [src]="episode.audio_url"
+      preload="none"
+      class="audio-player"
+    >
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+  

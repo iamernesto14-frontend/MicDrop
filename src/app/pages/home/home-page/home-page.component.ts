@@ -1,28 +1,56 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   Home,
   MessageSquare,
   List,
-  Users,
   Play
 } from 'lucide-angular';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
 import { MobileAdminMenuComponent } from '../../../shared/components/mobile-admin-menu/mobile-admin-menu.component';
 import { RouterOutlet } from '@angular/router';
-
+import { EpisodeService } from '../../../core/services/episode.service';
+import { EpisodeCardComponent } from '../../../shared/components/episode-card/episode-card.component';
+import { Episode } from '../../../models/episode.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [HeaderComponent, MobileAdminMenuComponent, RouterOutlet ],
+  imports: [
+    HeaderComponent,
+    MobileAdminMenuComponent,
+    RouterOutlet,
+    EpisodeCardComponent,
+    CommonModule
+  ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit {
   menuItems = [
     { label: 'Home', icon: Home, route: ['/'] },
     { label: 'Episodes', icon: Play, route: ['/episodes'] },
     { label: 'Playlists', icon: List, route: ['/playlists'] },
     { label: 'Confess', icon: MessageSquare, route: ['/confessions'] },
   ];
+
+  episodes: Episode[] = [];
+  loading = true;
+  error = '';
+
+  constructor(private episodeService: EpisodeService) {}
+
+  ngOnInit(): void {
+    // Use the optimized, cached method to fetch only 4 episodes
+    this.episodeService.getLatestEpisodes(4).subscribe({
+      next: (episodes) => {
+        this.episodes = episodes;
+        this.loading = false;
+      },
+      error: () => {
+        this.error = 'Failed to load latest episodes';
+        this.loading = false;
+      }
+    });
+  }
 }
