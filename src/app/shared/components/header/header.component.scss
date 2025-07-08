@@ -1,7 +1,7 @@
-@use '../../../../styles/variables.scss' as *;
-@use '../../../../styles/mixins.scss' as *;
+@use "../../../../styles/variables.scss" as *;
+@use "../../../../styles/mixins.scss" as *;
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
 header {
   @include flex(row, space-between, center);
@@ -37,10 +37,10 @@ header {
     display: none;
 
     a {
-        font-size: 0.875rem;
+      font-size: 0.875rem;
 
       &:hover {
-        color: rgba(37, 99, 235, 1);;
+        color: rgba(37, 99, 235, 1);
       }
     }
   }
@@ -55,7 +55,7 @@ header {
       font-size: 1rem;
 
       &:hover {
-        color: rgba(37, 99, 235, 1);;
+        color: rgba(37, 99, 235, 1);
       }
     }
 
@@ -65,12 +65,12 @@ header {
   }
 
   @media (min-width: 768px) {
-        padding: 1rem 4rem;
+    padding: 1rem 4rem;
 
-        nav {
-            @include flex(row, center, center);
-            gap: 1rem;
-            cursor: pointer;
-          }
+    nav {
+      @include flex(row, center, center);
+      gap: 1rem;
+      cursor: pointer;
+    }
   }
 }

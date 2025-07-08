@@ -1,0 +1,8 @@
+<button class="play-btn" (click)="togglePlay($event)">
+  <lucide-angular
+    [img]="isCurrent && isPlaying ? Pause : Play"
+    [size]="24"
+    [strokeWidth]="2"
+    class="play-icon"
+  ></lucide-angular>
+</button>

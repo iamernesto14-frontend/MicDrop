@@ -1,2 +1,1 @@
-export interface Confession {
-}
+export interface Confession {}

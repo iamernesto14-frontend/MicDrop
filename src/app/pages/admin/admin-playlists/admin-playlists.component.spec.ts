@@ -8,9 +8,8 @@ describe('AdminPlaylistsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AdminPlaylistsComponent]
-    })
-    .compileComponents();
+      imports: [AdminPlaylistsComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AdminPlaylistsComponent);
     component = fixture.componentInstance;

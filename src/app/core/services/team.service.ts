@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { TeamMember } from '../../models/team-member.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TeamService {
   private baseUrl = `${environment.apiUrl}/team-members`;
@@ -27,5 +27,4 @@ export class TeamService {
   updateTeamMember(id: number, data: any): Observable<any> {
     return this.http.put(`${this.baseUrl}/${id}`, data);
   }
-  
 }

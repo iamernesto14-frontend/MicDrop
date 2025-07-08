@@ -8,9 +8,8 @@ describe('AdminPlaylistFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AdminPlaylistFormComponent]
-    })
-    .compileComponents();
+      imports: [AdminPlaylistFormComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AdminPlaylistFormComponent);
     component = fixture.componentInstance;

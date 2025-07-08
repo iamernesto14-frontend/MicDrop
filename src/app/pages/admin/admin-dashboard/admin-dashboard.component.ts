@@ -5,7 +5,7 @@ import { AuthService } from '../../../core/services/auth.service';
   selector: 'app-admin-dashboard',
   imports: [],
   templateUrl: './admin-dashboard.component.html',
-  styleUrl: './admin-dashboard.component.scss'
+  styleUrl: './admin-dashboard.component.scss',
 })
 export class AdminDashboardComponent {
   userName: string = '';

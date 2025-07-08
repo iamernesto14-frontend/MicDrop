@@ -8,7 +8,7 @@ import {
   MessageSquare,
   Users,
   LogOut,
-  Headphones
+  Headphones,
 } from 'lucide-angular';
 import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 
@@ -25,10 +25,10 @@ import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component'
     RouterLinkActive,
     LucideAngularModule,
     ThemeToggleComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
   ],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
   readonly LayoutDashboard = LayoutDashboard;
@@ -43,13 +43,13 @@ export class SidebarComponent {
   admin = {
     name: 'Ernest Anokye',
     email: 'eernesto211@gmail.com',
-    avatar: 'https://ui-avatars.com/api/?name=Ernest+Anokye'
+    avatar: 'https://ui-avatars.com/api/?name=Ernest+Anokye',
   };
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
   ) {}
 
   openLogoutModal() {

@@ -1,5 +1,5 @@
-@use '../../../../styles/variables' as *;
-@use '../../../../styles/mixins' as *;
+@use "../../../../styles/variables" as *;
+@use "../../../../styles/mixins" as *;
 
 .team-form-container {
   background-color: var(--background);
@@ -78,7 +78,7 @@
     }
   }
 
-  button[type='button'] {
+  button[type="button"] {
     align-self: flex-start;
     background-color: #3b82f6;
     color: white;
@@ -92,7 +92,7 @@
     }
   }
 
-  button[type='submit'] {
+  button[type="submit"] {
     background-color: #10b981;
     color: white;
     padding: 0.75rem 1.5rem;

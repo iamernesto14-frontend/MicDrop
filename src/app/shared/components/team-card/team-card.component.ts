@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-team-card',
   imports: [],
   templateUrl: './team-card.component.html',
-  styleUrl: './team-card.component.scss'
+  styleUrl: './team-card.component.scss',
 })
-export class TeamCardComponent {
-
-}
+export class TeamCardComponent {}

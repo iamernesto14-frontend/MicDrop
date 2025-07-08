@@ -5,11 +5,9 @@ import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 
 @Component({
   selector: 'app-header',
-  imports: [
-    LucideAngularModule, RouterLink, ThemeToggleComponent
-  ],
+  imports: [LucideAngularModule, RouterLink, ThemeToggleComponent],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   readonly Headphones = Headphones;

@@ -1,0 +1,124 @@
+@use "../../../../styles/variables" as *;
+@use "../../../../styles/mixins" as *;
+
+.team-container {
+  padding: 2rem;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    .header-content {
+      h2 {
+        font-size: 1.5rem;
+        color: var(--foreground);
+      }
+
+      p {
+        color: var(--muted-foreground);
+        font-size: 0.95rem;
+      }
+    }
+
+    .add-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: #10b981;
+      color: white;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-weight: 600;
+
+      &:hover {
+        background-color: #059669;
+      }
+    }
+  }
+
+  .team-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .team-card {
+    background-color: var(--card-background);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+
+    .card-content {
+      margin-bottom: 1rem;
+
+      h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: var(--foreground);
+      }
+
+      p {
+        font-size: 0.95rem;
+        color: var(--muted-foreground);
+        margin-bottom: 0.25rem;
+      }
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.5rem;
+
+      .icon-btn {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0.4rem;
+        border-radius: 0.4rem;
+        transition: background-color 0.2s;
+
+        &.pen:hover {
+          background-color: #facc15;
+        }
+
+        &.trash:hover {
+          background-color: #f87171;
+        }
+      }
+    }
+  }
+
+  .drawer {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    max-width: 480px;
+    height: 100vh;
+    background-color: white;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.05);
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+
+    &.open {
+      right: 0;
+    }
+  }
+
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+  }
+}

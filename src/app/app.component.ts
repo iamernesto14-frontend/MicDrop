@@ -5,19 +5,20 @@ import { loadTheme } from './store/theme/theme.actions';
 import { selectTheme } from './store/theme/theme.selectors';
 import { DOCUMENT } from '@angular/common';
 import { ToastComponent } from './shared/components/toast/toast.component';
+import { AudioPlayerComponent } from './shared/components/audio-player/audio-player.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ToastComponent],
+  imports: [RouterOutlet, ToastComponent, AudioPlayerComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
   tittle = 'micdrop';
   constructor(
     private store: Store,
     private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
   ) {}
 
   ngOnInit(): void {

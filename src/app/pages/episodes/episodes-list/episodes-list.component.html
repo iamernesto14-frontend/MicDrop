@@ -1,5 +1,28 @@
+<!-- episodes-list.component.html -->
 <app-header></app-header>
-<p>episodes-list works!</p>
+
+<div class="page-title">
+  <h2>All Episodes</h2>
+  <p>
+    Discover our collection of thoughtful conversations and guided experiences
+    designed to support your journey.
+  </p>
+</div>
+
+<div *ngIf="loading" class="status loading">Loading...</div>
+<div *ngIf="error" class="status error">{{ error }}</div>
+
+<div *ngIf="!loading && episodes.length > 0" class="episode-grid">
+  <app-episode-card
+    *ngFor="let episode of episodes"
+    [episode]="episode"
+  ></app-episode-card>
+</div>
+
+<div *ngIf="!loading && episodes.length === 0" class="status empty">
+  No episodes available at the moment.
+</div>
+
 <app-mobile-admin-menu
   class="scroll-aware-menu"
   [menuItems]="menuItems"

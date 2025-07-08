@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-form-input',
   imports: [],
   templateUrl: './form-input.component.html',
-  styleUrl: './form-input.component.scss'
+  styleUrl: './form-input.component.scss',
 })
-export class FormInputComponent {
-
-}
+export class FormInputComponent {}

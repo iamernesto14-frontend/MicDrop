@@ -4,18 +4,18 @@ import { AdminToolbarComponent } from '../admin-toolbar/admin-toolbar.component'
 import { SidebarComponent } from '../../../shared/components/sidebar/sidebar.component';
 import { MobileAdminMenuComponent } from '../../../shared/components/mobile-admin-menu/mobile-admin-menu.component';
 import { CommonModule } from '@angular/common';
-import {
-  LayoutDashboard,
-  Users,
-  MessageSquare,
-  List,
-} from 'lucide-angular';
+import { LayoutDashboard, Users, MessageSquare, List } from 'lucide-angular';
 
 @Component({
   selector: 'app-admin-layout',
-  imports: [RouterOutlet, AdminToolbarComponent, SidebarComponent, MobileAdminMenuComponent, CommonModule,],
+  imports: [
+    RouterOutlet,
+    SidebarComponent,
+    MobileAdminMenuComponent,
+    CommonModule,
+  ],
   templateUrl: './admin-layout.component.html',
-  styleUrl: './admin-layout.component.scss'
+  styleUrl: './admin-layout.component.scss',
 })
 export class AdminLayoutComponent {
   isScrollingDown = false;
@@ -30,9 +30,12 @@ export class AdminLayoutComponent {
 
   menuItems = [
     { label: 'Dashboard', icon: LayoutDashboard, route: ['/admin'] },
-    { label: 'Confessions', icon: MessageSquare, route: ['/admin', 'confessions'] },
+    {
+      label: 'Confessions',
+      icon: MessageSquare,
+      route: ['/admin', 'confessions'],
+    },
     { label: 'Playlists', icon: List, route: ['/admin', 'playlists'] },
     { label: 'Team', icon: Users, route: ['/admin', 'team'] },
   ];
-
 }

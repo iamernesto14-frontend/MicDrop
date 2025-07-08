@@ -5,8 +5,8 @@ import { TeamMember } from '../../models/team-member.model';
 export class FilterPipe implements PipeTransform {
   transform(members: TeamMember[], searchTerm: string): TeamMember[] {
     if (!searchTerm) return members;
-    return members.filter(m =>
-      m.name.toLowerCase().includes(searchTerm.toLowerCase())
+    return members.filter((m) =>
+      m.name.toLowerCase().includes(searchTerm.toLowerCase()),
     );
   }
 }
