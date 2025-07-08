@@ -7,15 +7,16 @@ import {
   Play
 } from 'lucide-angular';
 import { Episode } from '../../../models/episode.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { EpisodeService } from '../../../core/services/episode.service';
 import { of, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from "../../../shared/components/header/header.component";
+import { PlayToggleButtonComponent } from '../../../shared/components/play-toggle-button/play-toggle-button.component';
 
 @Component({
   selector: 'app-episode-detail',
-  imports: [MobileAdminMenuComponent, CommonModule, HeaderComponent],
+  imports: [MobileAdminMenuComponent, CommonModule, HeaderComponent, PlayToggleButtonComponent, RouterLink],
   templateUrl: './episode-detail.component.html',
   styleUrl: './episode-detail.component.scss'
 })

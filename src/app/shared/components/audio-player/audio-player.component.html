@@ -1,13 +1,12 @@
-<div *ngIf="episode" class="audio-player-wrapper">
-    <div class="audio-info">
-      <strong class="episode-title">{{ episode.title }}</strong>
-      <span>· Season {{ episode.season }} · Episode {{ episode.episode }}</span>
+   <div class="audio-player-wrapper">
+    <div *ngIf="episode" class="audio-info">
+      <strong>{{ episode.title }}</strong>
+      <span> · Season {{ episode.season }} · Episode {{ episode.episode }}</span>
     </div>
   
     <audio
       #audio
       controls
-      [src]="episode.audio_url"
       preload="none"
       class="audio-player"
     >

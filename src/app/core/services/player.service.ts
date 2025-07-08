@@ -19,7 +19,24 @@ export class PlayerService {
 
   get isPlaying() {
     return this.isPlayingSubject.value;
+    }
+    
+    // player.service.ts
+toggleEpisode(episode: Episode) {
+    const current = this.currentEpisodeSubject.getValue();
+    const isSame = current?.id === episode.id;
+    const isPlaying = this.isPlayingSubject.getValue();
+  
+    if (isSame) {
+      // Toggle play/pause for the same episode
+      this.isPlayingSubject.next(!isPlaying);
+    } else {
+      // Start new episode
+      this.currentEpisodeSubject.next(episode);
+      this.isPlayingSubject.next(true);
+    }
   }
+  
 
   playEpisode(episode: Episode) {
     if (this.currentEpisode?.id === episode.id) {

@@ -5,11 +5,12 @@ import { Episode } from '../../../models/episode.model';
 import { Play, Pause, LucideAngularModule } from 'lucide-angular';
 import { PlayerService } from '../../../core/services/player.service';
 import { Subscription } from 'rxjs';
+import { PlayToggleButtonComponent } from '../play-toggle-button/play-toggle-button.component';
 
 @Component({
   selector: 'app-episode-card',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, LucideAngularModule, PlayToggleButtonComponent],
   templateUrl: './episode-card.component.html',
   styleUrls: ['./episode-card.component.scss']
 })

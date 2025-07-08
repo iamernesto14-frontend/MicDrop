@@ -13,14 +13,17 @@
       </div>
       <p class="description">{{ episode.description }}</p>
 
-      <button class="play-btn" (click)="playThisEpisode($event)">
+      <!-- <button class="play-btn" (click)="playThisEpisode($event)">
         <lucide-angular
           class="play-icon"
           [img]="isCurrent && isPlaying ? Pause : Play"
           [size]="24"
           [strokeWidth]="2"
         ></lucide-angular>
-      </button>
+      </button> -->
+
+      <app-play-toggle-button [episode]="episode"></app-play-toggle-button>
+
       
       
   
