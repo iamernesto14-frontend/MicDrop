@@ -1,6 +1,11 @@
 // admin-playlist-form.component.ts
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { PlaylistService } from '../../../core/services/playlist.service';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -18,10 +23,10 @@ import { Playlist } from '../../../models/playlist.model';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   templateUrl: './admin-playlist-form.component.html',
-  styleUrls: ['./admin-playlist-form.component.scss']
+  styleUrls: ['./admin-playlist-form.component.scss'],
 })
 export class AdminPlaylistFormComponent {
   @Input() playlist: Playlist | null = null;
@@ -30,11 +35,14 @@ export class AdminPlaylistFormComponent {
   playlistForm: FormGroup;
   episodes: any[] = [];
 
-  constructor(private fb: FormBuilder, private playlistService: PlaylistService) {
+  constructor(
+    private fb: FormBuilder,
+    private playlistService: PlaylistService,
+  ) {
     this.playlistForm = this.fb.group({
       title: ['', Validators.required],
       description: [''],
-      episodes: [[]]
+      episodes: [[]],
     });
   }
 
@@ -52,7 +60,7 @@ export class AdminPlaylistFormComponent {
       },
       error: (err) => {
         console.error('Failed to fetch episodes:', err);
-      }
+      },
     });
   }
 
@@ -60,12 +68,15 @@ export class AdminPlaylistFormComponent {
     if (this.playlistForm.invalid) return;
 
     const action = this.playlist
-      ? this.playlistService.updatePlaylist(this.playlist.id, this.playlistForm.value)
+      ? this.playlistService.updatePlaylist(
+          this.playlist.id,
+          this.playlistForm.value,
+        )
       : this.playlistService.createPlaylist(this.playlistForm.value);
 
     action.subscribe({
       next: () => this.submitted.emit(),
-      error: (err) => console.error('Failed to save playlist:', err)
+      error: (err) => console.error('Failed to save playlist:', err),
     });
   }
 }

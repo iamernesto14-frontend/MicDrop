@@ -8,9 +8,8 @@ describe('PlayToggleButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PlayToggleButtonComponent]
-    })
-    .compileComponents();
+      imports: [PlayToggleButtonComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PlayToggleButtonComponent);
     component = fixture.componentInstance;

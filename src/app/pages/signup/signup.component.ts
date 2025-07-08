@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -11,7 +16,7 @@ import { ToastService } from '../../core/services/toast.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.scss'
+  styleUrl: './signup.component.scss',
 })
 export class SignupComponent {
   signupForm: FormGroup;
@@ -21,13 +26,13 @@ export class SignupComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private toastService: ToastService 
+    private toastService: ToastService,
   ) {
     this.signupForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      password_confirmation: ['', Validators.required]
+      password_confirmation: ['', Validators.required],
     });
   }
 
@@ -36,7 +41,7 @@ export class SignupComponent {
 
     const formValue = {
       ...this.signupForm.value,
-      role: 'admin'
+      role: 'admin',
     };
 
     this.authService.register(formValue).subscribe({
@@ -47,7 +52,7 @@ export class SignupComponent {
       error: (error: HttpErrorResponse) => {
         const msg = error?.error?.message || 'Registration failed.';
         this.toastService.show(msg, 'error');
-      }
+      },
     });
   }
 }

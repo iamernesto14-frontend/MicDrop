@@ -3,20 +3,24 @@
 <div *ngIf="error" class="error">{{ error }}</div>
 
 <div *ngIf="episode && !loading" class="episode-detail">
-    <!-- route back to all episodes page when clicked on the back link -->
-    <a routerLink="/episodes" class="back-link" aria-label="Back to all episodes">← Back to all episodes</a>
-  <img [src]="episode.img_url" alt="{{ episode.title }}" class="episode-image" />
+  <a routerLink="/episodes" class="back-link" aria-label="Back to all episodes"
+    >← Back to all episodes</a
+  >
+  <img
+    [src]="episode.img_url"
+    alt="{{ episode.title }}"
+    class="episode-image"
+  />
 
   <h1 class="title">{{ episode.title }}</h1>
 
   <p class="meta">
     Season {{ episode.season }}, Episode {{ episode.episode }} ·
-    {{ episode.duration }} ·
-    Posted on {{ episode.posted_on | date: 'longDate' }}
+    {{ episode.duration }} · Posted on
+    {{ episode.posted_on | date: "longDate" }}
   </p>
 
   <app-play-toggle-button [episode]="episode"></app-play-toggle-button>
-
 
   <section class="description">
     <h2>Description</h2>
@@ -25,11 +29,21 @@
 
   <section class="platforms">
     <h2>Listen on</h2>
-    <a [href]="episode.spotify_url" target="_blank" rel="noopener noreferrer" class="platform-link">
+    <a
+      [href]="episode.spotify_url"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="platform-link"
+    >
       🎧 Spotify
     </a>
-    <a [href]="episode.apple_podcasts_url" target="_blank" rel="noopener noreferrer" class="platform-link">
-      🍎 Apple Podcasts
+    <a
+      [href]="episode.apple_podcasts_url"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="platform-link"
+    >
+       Apple Podcasts
     </a>
   </section>
 </div>

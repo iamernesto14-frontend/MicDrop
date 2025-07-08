@@ -4,7 +4,7 @@ import {
   OnInit,
   ViewChild,
   ElementRef,
-  AfterViewInit
+  AfterViewInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PlayerService } from '../../../core/services/player.service';
@@ -15,7 +15,7 @@ import { Episode } from '../../../models/episode.model';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './audio-player.component.html',
-  styleUrl: './audio-player.component.scss'
+  styleUrl: './audio-player.component.scss',
 })
 export class AudioPlayerComponent implements OnInit, AfterViewInit {
   episode: Episode | null = null;
@@ -34,11 +34,11 @@ export class AudioPlayerComponent implements OnInit, AfterViewInit {
         setTimeout(() => this.audioRef.nativeElement.play(), 0);
       }
     });
-  
+
     this.playerService.isPlaying$.subscribe((playing) => {
       const audio = this.audioRef?.nativeElement;
       if (!audio) return;
-  
+
       if (playing) {
         audio.play();
       } else {
@@ -46,7 +46,6 @@ export class AudioPlayerComponent implements OnInit, AfterViewInit {
       }
     });
   }
-  
 
   ngAfterViewInit(): void {
     this.isViewInitialized = true;
@@ -54,9 +53,12 @@ export class AudioPlayerComponent implements OnInit, AfterViewInit {
     const audio = this.audioRef?.nativeElement;
     if (!audio) return;
 
-    // Sync playback state with PlayerService
     audio.addEventListener('play', () => this.playerService.setIsPlaying(true));
-    audio.addEventListener('pause', () => this.playerService.setIsPlaying(false));
-    audio.addEventListener('ended', () => this.playerService.setIsPlaying(false));
+    audio.addEventListener('pause', () =>
+      this.playerService.setIsPlaying(false),
+    );
+    audio.addEventListener('ended', () =>
+      this.playerService.setIsPlaying(false),
+    );
   }
 }

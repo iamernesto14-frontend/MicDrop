@@ -1,9 +1,15 @@
-@use '../src/styles/reset' as *;
-@use '../src/styles/variables' as *;
-@use '../src/styles/mixins' as *;
+@use "../src/styles/reset" as *;
+@use "../src/styles/variables" as *;
+@use "../src/styles/mixins" as *;
 
 body {
-    font-family: var(--font-sans);
+  font-family: var(--font-sans);
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

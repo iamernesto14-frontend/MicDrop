@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { Episode } from '../../models/episode.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EpisodeService {
   private baseUrl = `${environment.apiUrl}/episodes`;
@@ -21,29 +21,32 @@ export class EpisodeService {
 
   getEpisodeByIdFromList(id: number): Observable<Episode | null> {
     if (this.latestEpisodesCache) {
-      const found = this.latestEpisodesCache.find(ep => ep.id === id) || null;
+      const found = this.latestEpisodesCache.find((ep) => ep.id === id) || null;
       return of(found);
     }
-  
+
     // Fetch all episodes (you can limit page size as needed)
     return this.getEpisodes().pipe(
-      map(res => {
+      map((res) => {
         const sorted = res.data.sort(
-          (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          (a, b) =>
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
         );
         this.latestEpisodesCache = sorted;
-        return sorted.find(ep => ep.id === id) || null;
-      })
+        return sorted.find((ep) => ep.id === id) || null;
+      }),
     );
   }
-  
 
   /**
    * Returns the latest episodes with in-memory caching.
    * @param limit Number of episodes to return (default: 5)
    * @param forceRefresh Whether to bypass cache and fetch from server
    */
-  getLatestEpisodes(limit: number = 5, forceRefresh: boolean = false): Observable<Episode[]> {
+  getLatestEpisodes(
+    limit: number = 5,
+    forceRefresh: boolean = false,
+  ): Observable<Episode[]> {
     if (this.latestEpisodesCache && !forceRefresh) {
       return of(this.latestEpisodesCache.slice(0, limit));
     }
@@ -53,11 +56,12 @@ export class EpisodeService {
       map((res) => {
         // Optionally sort by createdAt if backend doesn't do it
         const sorted = res.data.sort(
-          (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          (a, b) =>
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
         );
         this.latestEpisodesCache = sorted;
         return sorted.slice(0, limit);
-      })
+      }),
     );
   }
 

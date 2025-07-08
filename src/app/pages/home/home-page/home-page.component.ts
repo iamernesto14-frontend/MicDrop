@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  Home,
-  MessageSquare,
-  List,
-  Play
-} from 'lucide-angular';
+import { Home, MessageSquare, List, Play } from 'lucide-angular';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
 import { MobileAdminMenuComponent } from '../../../shared/components/mobile-admin-menu/mobile-admin-menu.component';
 import { RouterOutlet } from '@angular/router';
@@ -21,7 +16,7 @@ import { CommonModule } from '@angular/common';
     MobileAdminMenuComponent,
     RouterOutlet,
     EpisodeCardComponent,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
@@ -41,7 +36,6 @@ export class HomePageComponent implements OnInit {
   constructor(private episodeService: EpisodeService) {}
 
   ngOnInit(): void {
-    // Use the optimized, cached method to fetch only 4 episodes
     this.episodeService.getLatestEpisodes(4).subscribe({
       next: (episodes) => {
         this.episodes = episodes;
@@ -50,7 +44,7 @@ export class HomePageComponent implements OnInit {
       error: () => {
         this.error = 'Failed to load latest episodes';
         this.loading = false;
-      }
+      },
     });
   }
 }

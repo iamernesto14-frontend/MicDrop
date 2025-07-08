@@ -12,7 +12,7 @@ import { PlayToggleButtonComponent } from '../play-toggle-button/play-toggle-but
   standalone: true,
   imports: [CommonModule, LucideAngularModule, PlayToggleButtonComponent],
   templateUrl: './episode-card.component.html',
-  styleUrls: ['./episode-card.component.scss']
+  styleUrls: ['./episode-card.component.scss'],
 })
 export class EpisodeCardComponent implements OnInit, OnDestroy {
   @Input() episode!: Episode;
@@ -23,22 +23,25 @@ export class EpisodeCardComponent implements OnInit, OnDestroy {
 
   private playerSub!: Subscription;
 
-  constructor(private router: Router, private playerService: PlayerService) {}
+  constructor(
+    private router: Router,
+    private playerService: PlayerService,
+  ) {}
 
   ngOnInit(): void {
-  this.playerSub = this.playerService.currentEpisode$.subscribe(current => {
-    this.isCurrent = current?.id === this.episode?.id;
-  });
+    this.playerSub = this.playerService.currentEpisode$.subscribe((current) => {
+      this.isCurrent = current?.id === this.episode?.id;
+    });
 
-  this.playerService.isPlaying$.subscribe(playing => {
-    this.isPlaying = playing;
-  });
-}
+    this.playerService.isPlaying$.subscribe((playing) => {
+      this.isPlaying = playing;
+    });
+  }
 
-playThisEpisode(event: Event) {
-  event.stopPropagation();
-  this.playerService.playEpisode(this.episode);
-}
+  playThisEpisode(event: Event) {
+    event.stopPropagation();
+    this.playerService.playEpisode(this.episode);
+  }
 
   goToDetails(id: number | undefined) {
     if (id) this.router.navigate(['/episodes', id]);

@@ -1,16 +1,10 @@
-   <div class="audio-player-wrapper">
-    <div *ngIf="episode" class="audio-info">
-      <strong>{{ episode.title }}</strong>
-      <span> · Season {{ episode.season }} · Episode {{ episode.episode }}</span>
-    </div>
-  
-    <audio
-      #audio
-      controls
-      preload="none"
-      class="audio-player"
-    >
-      Your browser does not support the audio element.
-    </audio>
+<div class="audio-player-wrapper">
+  <div *ngIf="episode" class="audio-info">
+    <strong>{{ episode.title }}</strong>
+    <span> · Season {{ episode.season }} · Episode {{ episode.episode }}</span>
   </div>
-  
+
+  <audio #audio controls preload="none" class="audio-player">
+    Your browser does not support the audio element.
+  </audio>
+</div>

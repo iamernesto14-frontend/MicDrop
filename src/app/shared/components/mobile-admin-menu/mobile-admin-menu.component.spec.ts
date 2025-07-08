@@ -8,9 +8,8 @@ describe('MobileAdminMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MobileAdminMenuComponent]
-    })
-    .compileComponents();
+      imports: [MobileAdminMenuComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MobileAdminMenuComponent);
     component = fixture.componentInstance;

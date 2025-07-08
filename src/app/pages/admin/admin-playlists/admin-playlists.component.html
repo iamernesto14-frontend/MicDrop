@@ -5,7 +5,8 @@
       <p>Manage playlists and their linked episodes.</p>
     </div>
     <button class="add-btn" (click)="toggleForm()">
-      <lucide-angular [img]="PlusCircle" size="18" strokeWidth="2" /> Add Playlist
+      <lucide-angular [img]="PlusCircle" size="18" strokeWidth="2" /> Add
+      Playlist
     </button>
   </div>
 
@@ -13,7 +14,7 @@
     <div class="team-card" *ngFor="let playlist of playlists">
       <div class="card-content">
         <h3>{{ playlist.title }}</h3>
-        <p>{{ playlist.description || 'No description provided.' }}</p>
+        <p>{{ playlist.description || "No description provided." }}</p>
         <p><strong>Episodes:</strong> {{ playlist.episodes.length || 0 }}</p>
       </div>
 
@@ -30,7 +31,10 @@
 
   <!-- Slide-in Drawer -->
   <div class="drawer" [class.open]="showForm">
-    <app-admin-playlist-form (submitted)="onFormSubmitted()" [playlist]="editingPlaylist ?? null" />
+    <app-admin-playlist-form
+      (submitted)="onFormSubmitted()"
+      [playlist]="editingPlaylist ?? null"
+    />
   </div>
 
   <!-- Backdrop -->

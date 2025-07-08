@@ -1,19 +1,18 @@
 .theme-toggle {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    padding: 6px;
-  
-    .theme-label {
-      font-size: 0.9rem;
-      color: var(--text);
-    }
-  
-    &:hover {
-      color: rgba(37, 99, 235, 1);
-      background-color: var(--accent);
-      border-radius: 5px;
-    }
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 6px;
+
+  .theme-label {
+    font-size: 0.9rem;
+    color: var(--text);
   }
-  
+
+  &:hover {
+    color: rgba(37, 99, 235, 1);
+    background-color: var(--accent);
+    border-radius: 5px;
+  }
+}

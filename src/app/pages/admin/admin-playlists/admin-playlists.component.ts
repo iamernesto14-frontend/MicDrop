@@ -4,7 +4,12 @@ import { CommonModule } from '@angular/common';
 import { PlaylistService } from '../../../core/services/playlist.service';
 import { Playlist } from '../../../models/playlist.model';
 import { AdminPlaylistFormComponent } from '../admin-playlist-form/admin-playlist-form.component';
-import { LucideAngularModule, SquarePen, Trash2, PlusCircle } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  SquarePen,
+  Trash2,
+  PlusCircle,
+} from 'lucide-angular';
 import { ConfirmModalComponent } from '../../../shared/components/confirm-modal/confirm-modal.component';
 import { ToastService } from '../../../core/services/toast.service';
 
@@ -15,10 +20,10 @@ import { ToastService } from '../../../core/services/toast.service';
     CommonModule,
     AdminPlaylistFormComponent,
     LucideAngularModule,
-    ConfirmModalComponent
+    ConfirmModalComponent,
   ],
   templateUrl: './admin-playlists.component.html',
-  styleUrl: './admin-playlists.component.scss'
+  styleUrl: './admin-playlists.component.scss',
 })
 export class AdminPlaylistsComponent {
   playlists: Playlist[] = [];
@@ -30,7 +35,10 @@ export class AdminPlaylistsComponent {
   readonly Trash2 = Trash2;
   readonly PlusCircle = PlusCircle;
 
-  constructor(private playlistService: PlaylistService, private toastService: ToastService) {}
+  constructor(
+    private playlistService: PlaylistService,
+    private toastService: ToastService,
+  ) {}
 
   ngOnInit(): void {
     this.loadPlaylists();
@@ -43,7 +51,7 @@ export class AdminPlaylistsComponent {
       },
       error: (err) => {
         console.error('Error loading playlists:', err);
-      }
+      },
     });
   }
 
@@ -73,14 +81,16 @@ export class AdminPlaylistsComponent {
     this.playlistService.deletePlaylist(this.playlistToDelete.id).subscribe({
       next: () => {
         this.toastService.show('Playlist deleted successfully.', 'success');
-        this.playlists = this.playlists.filter(p => p.id !== this.playlistToDelete?.id);
+        this.playlists = this.playlists.filter(
+          (p) => p.id !== this.playlistToDelete?.id,
+        );
         this.showConfirmModal = false;
         this.playlistToDelete = undefined;
       },
       error: () => {
         this.toastService.show('Failed to delete playlist.', 'error');
         this.showConfirmModal = false;
-      }
+      },
     });
   }
 

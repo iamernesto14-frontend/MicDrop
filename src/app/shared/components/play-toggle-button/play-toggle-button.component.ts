@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [CommonModule, LucideAngularModule],
   templateUrl: './play-toggle-button.component.html',
-  styleUrls: ['./play-toggle-button.component.scss']
+  styleUrls: ['./play-toggle-button.component.scss'],
 })
 export class PlayToggleButtonComponent implements OnInit, OnDestroy {
   @Input() episode!: Episode;
@@ -27,12 +27,12 @@ export class PlayToggleButtonComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subs.push(
-      this.playerService.currentEpisode$.subscribe(current => {
+      this.playerService.currentEpisode$.subscribe((current) => {
         this.isCurrent = current?.id === this.episode?.id;
       }),
-      this.playerService.isPlaying$.subscribe(playing => {
+      this.playerService.isPlaying$.subscribe((playing) => {
         this.isPlaying = playing;
-      })
+      }),
     );
   }
 
@@ -40,10 +40,8 @@ export class PlayToggleButtonComponent implements OnInit, OnDestroy {
     event.stopPropagation();
     this.playerService.toggleEpisode(this.episode);
   }
-  
-  
 
   ngOnDestroy(): void {
-    this.subs.forEach(sub => sub.unsubscribe());
+    this.subs.forEach((sub) => sub.unsubscribe());
   }
 }

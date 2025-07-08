@@ -11,14 +11,14 @@ import { AudioPlayerComponent } from './shared/components/audio-player/audio-pla
   selector: 'app-root',
   imports: [RouterOutlet, ToastComponent, AudioPlayerComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
   tittle = 'micdrop';
   constructor(
     private store: Store,
     private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
   ) {}
 
   ngOnInit(): void {

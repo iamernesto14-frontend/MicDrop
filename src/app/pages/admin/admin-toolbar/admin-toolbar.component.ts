@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-admin-toolbar',
   imports: [],
   templateUrl: './admin-toolbar.component.html',
-  styleUrl: './admin-toolbar.component.scss'
+  styleUrl: './admin-toolbar.component.scss',
 })
-export class AdminToolbarComponent {
-
-}
+export class AdminToolbarComponent {}

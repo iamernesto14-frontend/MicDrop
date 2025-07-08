@@ -5,14 +5,14 @@ import {
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   Validators,
   ReactiveFormsModule,
-  FormControl
+  FormControl,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -25,7 +25,7 @@ import { TeamMember } from '../../../models/team-member.model';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './admin-team-form.component.html',
-  styleUrl: './admin-team-form.component.scss'
+  styleUrl: './admin-team-form.component.scss',
 })
 export class AdminTeamFormComponent implements OnInit, OnChanges {
   @Input() member: TeamMember | null = null;
@@ -37,7 +37,7 @@ export class AdminTeamFormComponent implements OnInit, OnChanges {
     private fb: FormBuilder,
     private teamService: TeamService,
     private toastService: ToastService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -57,16 +57,26 @@ export class AdminTeamFormComponent implements OnInit, OnChanges {
       bio: [this.member?.bio || ''],
       profile_image: [this.member?.profile_image || ''],
       social_media_links: this.fb.group({
-        linkedin: [this.getSocialLink('LinkedIn'), [Validators.required, Validators.pattern('https?://.+')]],
-        twitter: [this.getSocialLink('Twitter'), [Validators.required, Validators.pattern('https?://.+')]],
-        instagram: [this.getSocialLink('Instagram'), [Validators.required, Validators.pattern('https?://.+')]]
-      })
+        linkedin: [
+          this.getSocialLink('LinkedIn'),
+          [Validators.required, Validators.pattern('https?://.+')],
+        ],
+        twitter: [
+          this.getSocialLink('Twitter'),
+          [Validators.required, Validators.pattern('https?://.+')],
+        ],
+        instagram: [
+          this.getSocialLink('Instagram'),
+          [Validators.required, Validators.pattern('https?://.+')],
+        ],
+      }),
     });
   }
 
   getSocialLink(platform: string): string {
     return (
-      this.member?.social_media_links.find(link => link.platform === platform)?.url || ''
+      this.member?.social_media_links.find((link) => link.platform === platform)
+        ?.url || ''
     );
   }
 
@@ -81,19 +91,22 @@ export class AdminTeamFormComponent implements OnInit, OnChanges {
       social_media_links: [
         { platform: 'LinkedIn', url: linksGroup.linkedin },
         { platform: 'Twitter', url: linksGroup.twitter },
-        { platform: 'Instagram', url: linksGroup.instagram }
-      ]
+        { platform: 'Instagram', url: linksGroup.instagram },
+      ],
     };
 
     if (this.member?.id) {
       this.teamService.updateTeamMember(this.member.id, payload).subscribe({
         next: () => {
-          this.toastService.show('Team member updated successfully!', 'success');
+          this.toastService.show(
+            'Team member updated successfully!',
+            'success',
+          );
           this.submitted.emit();
         },
         error: () => {
           this.toastService.show('Failed to update member.', 'error');
-        }
+        },
       });
     } else {
       this.teamService.addTeamMember(payload).subscribe({
@@ -104,7 +117,7 @@ export class AdminTeamFormComponent implements OnInit, OnChanges {
         },
         error: () => {
           this.toastService.show('Failed to add team member.', 'error');
-        }
+        },
       });
     }
   }

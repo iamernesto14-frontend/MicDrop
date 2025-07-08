@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { provideRouter } from '@angular/router';
 import { canActivateAdmin, canMatchAdmin } from './core/guards/auth.guard';
 
-
 export const routes: Routes = [
   {
     path: '',
@@ -22,7 +21,9 @@ export const routes: Routes = [
   {
     path: 'confessions',
     loadChildren: () =>
-      import('./pages/confessions/confessions.routes').then((m) => m.CONFESSIONS_ROUTES),
+      import('./pages/confessions/confessions.routes').then(
+        (m) => m.CONFESSIONS_ROUTES,
+      ),
   },
   {
     path: 'episodes',
@@ -32,7 +33,9 @@ export const routes: Routes = [
   {
     path: 'playlists',
     loadChildren: () =>
-      import('./pages/playlists/playlists.routes').then((m) => m.PLAYLISTS_ROUTES),
+      import('./pages/playlists/playlists.routes').then(
+        (m) => m.PLAYLISTS_ROUTES,
+      ),
   },
   {
     path: 'team',
@@ -42,7 +45,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     canActivate: [canActivateAdmin],
-    canMatch: [canMatchAdmin],   
+    canMatch: [canMatchAdmin],
     loadChildren: () =>
       import('./pages/admin/admin.routes').then((m) => m.ADMIN_ROUTES),
   },
