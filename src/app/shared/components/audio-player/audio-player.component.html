@@ -1,5 +1,5 @@
-<div class="audio-player-wrapper">
-  <div *ngIf="episode" class="audio-info">
+<div *ngIf="episode && isPlaying" class="audio-player-wrapper">
+  <div class="audio-info">
     <div class="episode-details">
       <strong>{{ episode.title }}</strong>
       <span>Season {{ episode.season }} Episode {{ episode.episode }}</span>
