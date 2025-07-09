@@ -18,7 +18,12 @@
   </div>
 </section>
 
-<div *ngIf="loading">Loading episodes...</div>
-<div *ngIf="!loading && error">{{ error }}</div>
+<div *ngIf="loading" class="loading-container">
+  <div class="loading-text">Loading episodes...</div>
+</div>
+
+<div *ngIf="!loading && error" class="error-container">
+  <div class="error-text">{{ error }}</div>
+</div>
 
 <router-outlet></router-outlet>

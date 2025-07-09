@@ -9,7 +9,9 @@
   </p>
 </div>
 
-<div *ngIf="loading" class="status loading">Loading...</div>
+<div *ngIf="loading" class="loading-container">
+  <div class="loading-text">Loading episodes...</div>
+</div>
 <div *ngIf="error" class="status error">{{ error }}</div>
 
 <div *ngIf="!loading && episodes.length > 0" class="episode-grid">

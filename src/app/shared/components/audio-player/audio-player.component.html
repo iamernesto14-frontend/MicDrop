@@ -1,7 +1,21 @@
 <div class="audio-player-wrapper">
   <div *ngIf="episode" class="audio-info">
-    <strong>{{ episode.title }}</strong>
-    <span> · Season {{ episode.season }} · Episode {{ episode.episode }}</span>
+    <div class="episode-details">
+      <strong>{{ episode.title }}</strong>
+      <span>Season {{ episode.season }} Episode {{ episode.episode }}</span>
+    </div>
+    
+    <div class="player-controls">
+      <button class="control-btn" type="button" title="Previous">
+        ⏮
+      </button>
+      <button class="control-btn play-btn" type="button" title="Play/Pause">
+        ▶
+      </button>
+      <button class="control-btn" type="button" title="Next">
+        ⏭
+      </button>
+    </div>
   </div>
 
   <audio #audio controls preload="none" class="audio-player">
