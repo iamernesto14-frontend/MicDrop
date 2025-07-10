@@ -26,19 +26,15 @@
   }
   
   &:hover {
+    background: var(--gradient-primary);
+    color: var(--primary-foreground);
     transform: translateY(-1px);
     box-shadow: var(--shadow-md);
-    border-color: var(--primary-solid);
-    
-    &::before {
-      left: 0;
-    }
+    border-color: transparent;
     
     .theme-icon,
     .theme-label {
       color: var(--primary-foreground);
-      z-index: 1;
-      position: relative;
     }
   }
   
