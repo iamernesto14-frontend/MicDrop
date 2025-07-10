@@ -1,0 +1,17 @@
+.play-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .play-icon {
+    color: var(--foreground);
+  }
+  &:hover {
+    background-color: var(--muted);
+    border-radius: var(--radius);
+  }
+}

@@ -1,0 +1,13 @@
+<div class="admin-wrapper">
+  <app-sidebar class="desktop-only"></app-sidebar>
+
+  <div class="admin-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<app-mobile-admin-menu
+  class="scroll-aware-menu"
+  [menuItems]="menuItems"
+  [ngClass]="{ hide: isScrollingDown, show: !isScrollingDown }"
+></app-mobile-admin-menu>

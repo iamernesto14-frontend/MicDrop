@@ -1,0 +1,19 @@
+<div class="theme-toggle" (click)="toggleTheme()">
+  <lucide-angular
+    *ngIf="(theme$ | async) === 'light'"
+    [img]="Moon"
+    [size]="24"
+    [strokeWidth]="2"
+  ></lucide-angular>
+
+  <lucide-angular
+    *ngIf="(theme$ | async) === 'dark'"
+    [img]="Sun"
+    [size]="24"
+    [strokeWidth]="2"
+  ></lucide-angular>
+
+  <span class="theme-label" *ngIf="showLabel">
+    {{ (theme$ | async) === "dark" ? "Light Theme" : "Dark Theme" }}
+  </span>
+</div>

@@ -1,0 +1,35 @@
+<div class="episode-card" (click)="goToDetails(episode.id)">
+  <div class="image-container">
+    <img [src]="episode.img_url" [alt]="episode.title" />
+    <span class="duration">{{ episode.duration }}</span>
+  </div>
+
+  <div class="card-body">
+    <h3 class="title">{{ episode.title }}</h3>
+    <div class="meta">
+      <span class="pill">S{{ episode.season }}</span>
+      <span class="pill">E{{ episode.episode }}</span>
+      <span class="date"
+        >Posted {{ episode.posted_on | date: "mediumDate" }}</span
+      >
+    </div>
+    <p class="description">{{ episode.description }}</p>
+
+    <app-play-toggle-button [episode]="episode"></app-play-toggle-button>
+
+    <div class="links">
+      <a
+        *ngIf="episode.spotify_url"
+        [href]="episode.spotify_url"
+        target="_blank"
+        >Spotify</a
+      >
+      <a
+        *ngIf="episode.apple_podcasts_url"
+        [href]="episode.apple_podcasts_url"
+        target="_blank"
+        >Apple</a
+      >
+    </div>
+  </div>
+</div>

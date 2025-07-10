@@ -1,0 +1,56 @@
+<app-header></app-header>
+<div *ngIf="loading" class="loading-container">
+  <div class="loading-text">Loading episode...</div>
+</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<div *ngIf="episode && !loading" class="episode-detail">
+  <a routerLink="/episodes" class="back-link" aria-label="Back to all episodes"
+    >← Back to all episodes</a
+  >
+  <img
+    [src]="episode.img_url"
+    alt="{{ episode.title }}"
+    class="episode-image"
+  />
+
+  <h1 class="title">{{ episode.title }}</h1>
+
+  <p class="meta">
+    Season {{ episode.season }}, Episode {{ episode.episode }} ·
+    {{ episode.duration }} · Posted on
+    {{ episode.posted_on | date: "longDate" }}
+  </p>
+
+  <app-play-toggle-button [episode]="episode"></app-play-toggle-button>
+
+  <section class="description">
+    <h2>Description</h2>
+    <p [innerHTML]="episode.description"></p>
+  </section>
+
+  <section class="platforms">
+    <h2>Listen on</h2>
+    <a
+      [href]="episode.spotify_url"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="platform-link"
+    >
+      🎧 Spotify
+    </a>
+    <a
+      [href]="episode.apple_podcasts_url"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="platform-link"
+    >
+       Apple Podcasts
+    </a>
+  </section>
+</div>
+
+<app-mobile-admin-menu
+  class="scroll-aware-menu"
+  [menuItems]="menuItems"
+></app-mobile-admin-menu>

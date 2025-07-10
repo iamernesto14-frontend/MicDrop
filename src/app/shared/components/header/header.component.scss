@@ -1,0 +1,140 @@
+@use "../../../../styles/variables.scss" as *;
+@use "../../../../styles/mixins.scss" as *;
+
+header {
+  @include flex(row, space-between, center);
+  position: sticky;
+  width: 100%;
+  top: 0;
+  z-index: 999;
+  height: 5rem;
+  padding: 1rem 1.5rem;
+  background: rgba(var(--background-rgb), 0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  .logo {
+    @include flex(row, center, center);
+    gap: 0.75rem;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+
+    .logo-icon {
+      background: var(--gradient-primary);
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.3));
+      transition: filter 0.2s ease;
+    }
+
+    span {
+      font-family: var(--font-display, var(--font-sans));
+      font-weight: 800;
+      font-size: 1.5rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+    }
+  }
+
+  nav {
+    display: none;
+
+    a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--foreground);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s ease;
+      position: relative;
+      
+      &:hover {
+        color: var(--primary-solid);
+        background: var(--muted);
+        transform: translateY(-1px);
+      }
+
+      &.active {
+        color: var(--primary-solid);
+        background: var(--muted);
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -1rem;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 4px;
+          height: 4px;
+          background: var(--gradient-primary);
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+
+  .login {
+    @include flex(row, center, center);
+    gap: 1rem;
+
+    .login-link {
+      color: var(--foreground);
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius);
+      background: var(--muted);
+      transition: all 0.2s ease;
+      border: 1px solid var(--border);
+
+      &:hover {
+        background: var(--gradient-primary);
+        color: var(--primary-foreground);
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-md);
+        border-color: transparent;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    padding: 1rem 3rem;
+    height: 5.5rem;
+
+    nav {
+      @include flex(row, center, center);
+      gap: 0.5rem;
+    }
+
+    .logo {
+      gap: 1rem;
+      
+      span {
+        font-size: 1.75rem;
+      }
+    }
+  }
+
+  @media (min-width: 1024px) {
+    padding: 1rem 4rem;
+    
+    nav {
+      gap: 1rem;
+    }
+  }
+}

@@ -1,0 +1,91 @@
+
+
+<section class="dashboard-welcome">
+  <h1>Welcome back, {{ userName }}! 👋</h1>
+  <p>Manage your content using the side menu.</p>
+</section>
+
+<section class="dashboard-stats">
+  <div class="stat-card blue">
+    <h3>Total Confessions</h3>
+    <p class="count">47</p>
+    <span class="change">+12 this month</span>
+  </div>
+  <div class="stat-card green">
+      <h3>Episodes</h3>
+      <p class="count">{{ episodeCount }}</p>
+      <small class="change">+2 this month</small>
+    </div>
+  <div class="stat-card purple">
+    <h3>Playlists</h3>
+    <p class="count">8</p>
+    <span class="change">+1 this month</span>
+  </div>
+  <div class="stat-card orange">
+      <h3>Team Members</h3>
+      <p class="count">{{ teamCount }}</p>
+      <small class="change">Active team</small>
+    </div>
+    
+</section>
+
+<section class="dashboard-panels">
+  <div class="recent-activity">
+    <h3>Recent Activity</h3>
+    <ul>
+      <li>
+        <strong>New confession:</strong> “Finding courage to speak up”
+        <span class="time">2 hours ago</span>
+        <span class="badge new">new</span>
+      </li>
+      <li>
+        <strong>Updated playlist:</strong> “Healing Journey”
+        <span class="time">4 hours ago</span>
+        <span class="badge updated">updated</span>
+      </li>
+      <li>
+        <strong>New confession:</strong> “Overcoming imposter syndrome”
+        <span class="time">6 hours ago</span>
+        <span class="badge new">new</span>
+      </li>
+      <li>
+        <strong>Team member profile updated</strong>
+        <span class="time">1 day ago</span>
+        <span class="badge updated">updated</span>
+      </li>
+      <li>
+        <strong>New confession:</strong> “Learning to forgive myself”
+        <span class="time">1 day ago</span>
+        <span class="badge new">new</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="quick-actions">
+    <h3>Quick Actions</h3>
+    <div class="action-grid">
+      <!-- route to confessions -->
+      <button routerLink="/admin/confessions">View Confessions</button>
+      <!-- route to playlists -->
+      <button routerLink="/admin/playlists">Manage Playlists</button>
+      <!-- route to team -->
+      <button routerLink="/admin/team">Team Settings</button>
+      <button>View Site</button>
+    </div>
+  </div>
+</section>
+
+<section class="growth-panel">
+  <div class="growth-info">
+    <strong>Monthly Growth</strong>
+    <p>Your podcast is growing steadily</p>
+  </div>
+  <div class="growth-rate">
+    <span class="percentage">+15.8%</span>
+    <span class="note">vs last month</span>
+  </div>
+</section>
+
+
+
+

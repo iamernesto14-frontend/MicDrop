@@ -1,0 +1,114 @@
+@use "../../../../styles/variables" as *;
+@use "../../../../styles/mixins" as *;
+
+.team-form-container {
+  background-color: var(--background);
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: var(--foreground);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+
+    label {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--muted-foreground);
+    }
+
+    input,
+    textarea {
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      font-size: 0.95rem;
+      background-color: var(--input-background);
+      color: var(--foreground);
+
+      &:focus {
+        outline: none;
+        border-color: var(--ring);
+        box-shadow: 0 0 0 2px var(--ring);
+      }
+    }
+
+    textarea {
+      resize: vertical;
+    }
+  }
+
+  .social-link-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+
+    input {
+      flex: 1 1 45%;
+    }
+
+    button {
+      background-color: #ef4444;
+      color: white;
+      border: none;
+      padding: 0.5rem 0.8rem;
+      border-radius: 0.4rem;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #dc2626;
+      }
+    }
+  }
+
+  button[type="button"] {
+    align-self: flex-start;
+    background-color: #3b82f6;
+    color: white;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #2563eb;
+    }
+  }
+
+  button[type="submit"] {
+    background-color: #10b981;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+
+    &:hover {
+      background-color: #059669;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}

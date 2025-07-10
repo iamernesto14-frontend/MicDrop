@@ -1,0 +1,121 @@
+@use "../../../../styles/mixins" as *;
+@use "../../../../styles/variables" as *;
+
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background);
+  color: var(--foreground);
+  position: sticky;
+  top: 0;
+  border-right: 1px solid var(--sidebar-border);
+
+  .sidebar-header {
+    .logo-container {
+      padding: 1.2rem 1rem;
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        @include flex(row, flex-start, center);
+        gap: 0.5rem;
+
+        .logo-icon {
+          color: rgba(37, 99, 235, 1);
+        }
+      }
+
+      .admin-title {
+        font-size: 0.85rem;
+        color: #9ea0a1;
+      }
+    }
+
+    .admin-profile {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-top: 1px solid var(--sidebar-border);
+      padding: 1.2rem 1rem;
+
+      .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+
+      .admin-info {
+        display: flex;
+        flex-direction: column;
+
+        .name {
+          font-weight: 600;
+          font-size: 0.9rem;
+        }
+
+        .email {
+          font-size: 0.75rem;
+          color: #9ca3af;
+        }
+      }
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    flex-grow: 1;
+    border-top: 1px solid var(--sidebar-border);
+    padding: 1.2rem 1rem;
+    font-weight: bold;
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: inherit;
+      padding: 0.5rem 0.7rem;
+      border-radius: 0.5rem;
+      transition: background 0.2s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      &.active {
+        background-color: var(--sidebar-ring);
+        border-right: 2px solid var(--muted-foreground);
+      }
+    }
+  }
+
+  .sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: auto;
+    border-top: 1px solid var(--sidebar-border);
+    padding: 1.2rem 1rem;
+
+    .logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+      padding: 0.6rem 0.8rem;
+      border-radius: 0.5rem;
+      transition: background 0.2s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+<header>
+  <a class="main-icon" *ngFor="let item of menuItems" [routerLink]="item.route">
+    <lucide-angular
+      class="logo-icon"
+      [img]="item.icon"
+      [size]="24"
+      [strokeWidth]="2"
+    ></lucide-angular>
+    <span>{{ item.label }}</span>
+  </a>
+</header>

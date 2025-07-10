@@ -1,0 +1,58 @@
+<app-header></app-header>
+
+<app-mobile-admin-menu
+  class="scroll-aware-menu"
+  [menuItems]="menuItems"
+></app-mobile-admin-menu>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Welcome to <span>MicDrop</span></h1>
+    <p>
+      A safe space for healing, growth, and authentic conversations about mental health and personal wellness.
+    </p>
+    <div class="hero-buttons">
+      <button class="listen-btn">
+        <svg width="16" height="16" fill="currentColor"><use xlink:href="#play-icon" /></svg>
+        Listen Now
+      </button>
+      <button class="story-btn">Share Your Story</button>
+    </div>
+  </div>
+</section>
+
+
+<section class="latest-episodes" *ngIf="!loading && episodes.length">
+  <div class="page-title">
+    <h2>Latest Episodes</h2>
+    <p>Discover our most recent conversations</p>
+  </div>
+  <div class="episodes-grid">
+    <app-episode-card
+      *ngFor="let episode of episodes"
+      [episode]="episode"
+    ></app-episode-card>
+  </div>
+</section>
+
+<div *ngIf="loading" class="loading-container">
+  <div class="loading-text">Loading episodes...</div>
+</div>
+
+<div *ngIf="!loading && error" class="error-container">
+  <div class="error-text">{{ error }}</div>
+</div>
+
+<app-team-preview [members]="teamMembers" />
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <p>&copy; {{ currentYear }} MicDrop. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+<router-outlet></router-outlet>
