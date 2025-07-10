@@ -19,11 +19,16 @@ import { Episode } from '../../../models/episode.model';
 })
 export class AudioPlayerComponent implements OnInit, AfterViewInit {
   episode: Episode | null = null;
+  isPlaying = false;
   @ViewChild('audio') audioRef!: ElementRef<HTMLAudioElement>;
 
   private isViewInitialized = false;
 
-  constructor(private playerService: PlayerService) {}
+  constructor(public playerService: PlayerService) {}
+
+  closePlayer() {
+    this.playerService.setCurrentEpisode(null);
+  }
 
   ngOnInit(): void {
     this.playerService.currentEpisode$.subscribe((episode) => {
@@ -36,6 +41,7 @@ export class AudioPlayerComponent implements OnInit, AfterViewInit {
     });
 
     this.playerService.isPlaying$.subscribe((playing) => {
+      this.isPlaying = playing;
       const audio = this.audioRef?.nativeElement;
       if (!audio) return;
 

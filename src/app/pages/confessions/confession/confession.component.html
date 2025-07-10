@@ -1,5 +1,57 @@
 <app-header></app-header>
-<p>confession works!</p>
+
+<div class="confession-container">
+  <div class="confession-header">
+    <h1>Anonymous Confessions</h1>
+    <p>Share your thoughts anonymously. Your message will be kept completely private.</p>
+  </div>
+
+  <div *ngIf="showConfirmation" class="confirmation-message">
+    Your confession has been submitted successfully!
+  </div>
+
+  <form [formGroup]="confessionForm" (ngSubmit)="onSubmit()" class="confession-form">
+    <div class="form-group">
+      <label for="message">Your Confession</label>
+      <textarea 
+        id="message"
+        formControlName="message"
+        placeholder="Share your thoughts anonymously..."
+        rows="6"
+        
+        [class.error]="message?.invalid && message?.touched"
+      ></textarea>
+      
+      <div class="form-feedback">
+        <div *ngIf="message?.errors?.['required'] && message?.touched" class="error-text">
+          Message is required
+        </div>
+        <div *ngIf="message?.errors?.['noWords'] && message?.touched" class="error-text">
+          Message must contain at least one word
+        </div>
+        <div *ngIf="message?.errors?.['minlength'] && !message?.errors?.['noWords'] && message?.touched" class="error-text">
+          Message must be at least 10 characters
+        </div>
+        <div *ngIf="message?.errors?.['maxlength']" class="error-text">
+          Message cannot exceed 500 characters
+        </div>
+        <div class="char-count" [class.warning]="(message?.value?.length || 0) > 450">
+          {{ message?.value?.length || 0 }}/500 characters
+        </div>
+      </div>
+    </div>
+
+    <button 
+      type="submit" 
+      class="submit-btn"
+      [disabled]="confessionForm.invalid || isSubmitting"
+    >
+      <span *ngIf="isSubmitting">Submitting...</span>
+      <span *ngIf="!isSubmitting">Submit Confession</span>
+    </button>
+  </form>
+</div>
+
 <app-mobile-admin-menu
   class="scroll-aware-menu"
   [menuItems]="menuItems"

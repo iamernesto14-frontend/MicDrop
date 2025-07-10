@@ -177,3 +177,33 @@
     display: none;
   }
 }
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  
+  .loading-text {
+    font-size: 1.125rem;
+    color: var(--muted-foreground);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    
+    &::before {
+      content: '';
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--muted);
+      border-top: 2px solid var(--primary-solid);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

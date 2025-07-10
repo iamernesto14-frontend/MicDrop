@@ -1,5 +1,7 @@
 <app-header></app-header>
-<div *ngIf="loading" class="loading">Loading episode...</div>
+<div *ngIf="loading" class="loading-container">
+  <div class="loading-text">Loading episode...</div>
+</div>
 <div *ngIf="error" class="error">{{ error }}</div>
 
 <div *ngIf="episode && !loading" class="episode-detail">
