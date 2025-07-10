@@ -1,30 +1,106 @@
-<!-- signup.component.html -->
 <div class="signup-container">
-  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-    <h2>Create an Account</h2>
+  <div class="signup-card">
+    <div class="logo-section">
+      <span class="logo-icon">🎧</span>
+      <h2 class="signup-title">Create Account</h2>
+    </div>
+    <p class="signup-subtitle">Create a new admin account</p>
 
-    <div *ngIf="error" class="error">{{ error }}</div>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
 
-    <label>
-      Name
-      <input type="text" formControlName="name" />
-    </label>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="signup-form">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="Enter your full name"
+          [class.error]="signupForm.get('name')?.touched && signupForm.get('name')?.invalid"
+        />
+        <div
+          class="error-text"
+          *ngIf="signupForm.get('name')?.touched && signupForm.get('name')?.invalid"
+        >
+          Name is required
+        </div>
+      </div>
 
-    <label>
-      Email
-      <input type="email" formControlName="email" />
-    </label>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="Enter your email"
+          [class.error]="signupForm.get('email')?.touched && signupForm.get('email')?.invalid"
+        />
+        <div
+          class="error-text"
+          *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid"
+        >
+          Please enter a valid email address
+        </div>
+      </div>
 
-    <label>
-      Password
-      <input type="password" formControlName="password" />
-    </label>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Create a password"
+          [class.error]="signupForm.get('password')?.touched && signupForm.get('password')?.invalid"
+        />
+        <div
+          class="error-text"
+          *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid"
+        >
+          Password must be at least 6 characters
+        </div>
+      </div>
 
-    <label>
-      Confirm Password
-      <input type="password" formControlName="password_confirmation" />
-    </label>
+      <div class="form-group">
+        <label for="password_confirmation">Confirm Password</label>
+        <input
+          id="password_confirmation"
+          type="password"
+          formControlName="password_confirmation"
+          placeholder="Confirm your password"
+          [class.error]="signupForm.get('password_confirmation')?.touched && signupForm.get('password_confirmation')?.invalid"
+        />
+        <div
+          class="error-text"
+          *ngIf="signupForm.get('password_confirmation')?.touched && signupForm.get('password_confirmation')?.errors?.['required']"
+        >
+          Please confirm your password
+        </div>
+        <div
+          class="error-text"
+          *ngIf="signupForm.get('password_confirmation')?.touched && signupForm.get('password_confirmation')?.errors?.['passwordMismatch']"
+        >
+          Passwords must match
+        </div>
+      </div>
 
-    <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
-  </form>
+      <button type="submit" class="signup-btn" [disabled]="signupForm.invalid">
+        Create Account
+      </button>
+    </form>
+
+    <div class="auth-divider">
+      <span>Already have an account?</span>
+    </div>
+
+    <div class="login-section">
+      <p>Sign in to access your account</p>
+      <button class="login-btn" (click)="goToLogin()">
+        Sign In
+      </button>
+    </div>
+
+    <footer class="signup-footer">
+      <p>&copy; {{ currentYear }} MicDrop. All rights reserved.</p>
+    </footer>
+  </div>
 </div>

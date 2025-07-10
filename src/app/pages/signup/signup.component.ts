@@ -5,6 +5,8 @@ import {
   FormGroup,
   ReactiveFormsModule,
   Validators,
+  AbstractControl,
+  ValidationErrors,
 } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
@@ -32,9 +34,11 @@ export class SignupComponent {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      password_confirmation: ['', Validators.required],
+      password_confirmation: ['', [Validators.required, this.passwordMatchValidator.bind(this)]],
     });
   }
+
+  currentYear = new Date().getFullYear();
 
   onSubmit(): void {
     if (this.signupForm.invalid) return;
@@ -54,5 +58,18 @@ export class SignupComponent {
         this.toastService.show(msg, 'error');
       },
     });
+  }
+
+  goToLogin() {
+    this.router.navigate(['/login']);
+  }
+
+  passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+    const password = this.signupForm?.get('password')?.value;
+    const confirmPassword = control.value;
+    
+    if (!password || !confirmPassword) return null;
+    
+    return password === confirmPassword ? null : { passwordMismatch: true };
   }
 }
