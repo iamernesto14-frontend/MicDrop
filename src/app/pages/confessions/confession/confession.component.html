@@ -18,6 +18,7 @@
         formControlName="message"
         placeholder="Share your thoughts anonymously..."
         rows="6"
+        
         [class.error]="message?.invalid && message?.touched"
       ></textarea>
       
@@ -25,7 +26,10 @@
         <div *ngIf="message?.errors?.['required'] && message?.touched" class="error-text">
           Message is required
         </div>
-        <div *ngIf="message?.errors?.['minlength'] && message?.touched" class="error-text">
+        <div *ngIf="message?.errors?.['noWords'] && message?.touched" class="error-text">
+          Message must contain at least one word
+        </div>
+        <div *ngIf="message?.errors?.['minlength'] && !message?.errors?.['noWords'] && message?.touched" class="error-text">
           Message must be at least 10 characters
         </div>
         <div *ngIf="message?.errors?.['maxlength']" class="error-text">

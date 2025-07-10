@@ -1,4 +1,4 @@
-<div *ngIf="episode && isPlaying" class="audio-player-wrapper">
+<div *ngIf="episode" class="audio-player-wrapper">
   <div class="audio-info">
     <div class="episode-details">
       <strong>{{ episode.title }}</strong>
@@ -6,19 +6,14 @@
     </div>
     
     <div class="player-controls">
-      <button class="control-btn" type="button" title="Previous">
-        ⏮
-      </button>
-      <button class="control-btn play-btn" type="button" title="Play/Pause">
-        ▶
-      </button>
-      <button class="control-btn" type="button" title="Next">
-        ⏭
+      <button class="close-btn" (click)="closePlayer()" title="Close">
+        ✕
       </button>
     </div>
   </div>
 
-  <audio #audio controls preload="none" class="audio-player">
+  <audio #audio controls preload="metadata" class="audio-player">
+    <source [src]="episode.audio_url" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 </div>

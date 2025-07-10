@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl, ValidationErrors } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
 import { Home, MessageSquare, List, Users, Play } from 'lucide-angular';
@@ -25,8 +25,14 @@ export class ConfessionComponent {
 
   constructor(private fb: FormBuilder) {
     this.confessionForm = this.fb.group({
-      message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]]
+      message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500), this.noWordsValidator]]
     });
+  }
+
+  noWordsValidator(control: AbstractControl): ValidationErrors | null {
+    if (!control.value) return null;
+    const words = control.value.trim().split(/\s+/).filter((word: string) => word.length > 0);
+    return words.length === 0 ? { noWords: true } : null;
   }
 
   onSubmit() {

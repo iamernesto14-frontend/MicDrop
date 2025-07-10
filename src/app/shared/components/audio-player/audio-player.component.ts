@@ -26,6 +26,10 @@ export class AudioPlayerComponent implements OnInit, AfterViewInit {
 
   constructor(public playerService: PlayerService) {}
 
+  closePlayer() {
+    this.playerService.setCurrentEpisode(null);
+  }
+
   ngOnInit(): void {
     this.playerService.currentEpisode$.subscribe((episode) => {
       this.episode = episode;
