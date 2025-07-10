@@ -49,4 +49,8 @@ export class LoginComponent {
   }
 
   currentYear = new Date().getFullYear();
+
+  goToSignup() {
+    this.router.navigate(['/signup']);
+  }
 }
