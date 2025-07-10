@@ -8,6 +8,11 @@ import { EpisodeCardComponent } from '../../../shared/components/episode-card/ep
 import { Episode } from '../../../models/episode.model';
 import { CommonModule } from '@angular/common';
 
+import { TeamService } from '../../../core/services/team.service';
+import { TeamMember } from '../../../models/team-member.model';
+import { TeamPreviewComponent } from '../../../shared/components/team-preview/team-preview.component';
+
+
 @Component({
   selector: 'app-home-page',
   standalone: true,
@@ -17,6 +22,8 @@ import { CommonModule } from '@angular/common';
     RouterOutlet,
     EpisodeCardComponent,
     CommonModule,
+    TeamPreviewComponent,
+    
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
@@ -29,12 +36,14 @@ export class HomePageComponent implements OnInit {
     { label: 'Confess', icon: MessageSquare, route: ['/confessions'] },
   ];
 
+  teamMembers: TeamMember[] = [];
   episodes: Episode[] = [];
+  currentYear = new Date().getFullYear();
   loading = true;
   error = '';
 
-  constructor(private episodeService: EpisodeService) {}
-
+  constructor(private episodeService: EpisodeService, private teamService: TeamService) {}
+  
   ngOnInit(): void {
     this.episodeService.getLatestEpisodes(4).subscribe({
       next: (episodes) => {
@@ -46,5 +55,15 @@ export class HomePageComponent implements OnInit {
         this.loading = false;
       },
     });
+  
+    this.teamService.getTeamMembers().subscribe({
+      next: (res) => {
+        this.teamMembers = res.data.slice(0, 4); // Show only top 4 if needed
+      },
+      error: () => {
+        console.error('Failed to load team members');
+      },
+    });
   }
+  
 }
