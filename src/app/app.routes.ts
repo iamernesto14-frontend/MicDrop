@@ -37,11 +37,11 @@ export const routes: Routes = [
         (m) => m.PLAYLISTS_ROUTES,
       ),
   },
-  {
-    path: 'team',
-    loadChildren: () =>
-      import('./pages/team/team.routes').then((m) => m.TEAM_ROUTES),
-  },
+  // {
+  //   path: 'team',
+  //   loadChildren: () =>
+  //     import('./pages/team/team.routes').then((m) => m.TEAM_ROUTES),
+  // },
   {
     path: 'admin',
     canActivate: [canActivateAdmin],

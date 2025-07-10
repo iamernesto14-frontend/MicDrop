@@ -1,0 +1,32 @@
+<section class="team-preview">
+    <h2>Meet the Team</h2>
+    <p>These are the voices and minds behind the mic.</p>
+  
+    <div class="team-grid">
+      <div class="team-member" *ngFor="let member of members">
+        <img [src]="member.profile_image" [alt]="member.name" />
+        <div class="info">
+          <h3>{{ member.name }}</h3>
+          <p>{{ member.role }}</p>
+          <ul class="socials">
+            <li *ngIf="getSocialUrl(member, 'LinkedIn')">
+              <a [href]="getSocialUrl(member, 'LinkedIn')" target="_blank">
+                <lucide-angular [img]="Linkedin" size="16" />
+              </a>
+            </li>
+            <li *ngIf="getSocialUrl(member, 'Twitter')">
+              <a [href]="getSocialUrl(member, 'Twitter')" target="_blank">
+                <lucide-angular [img]="Twitter" size="16" />
+              </a>
+            </li>
+            <li *ngIf="getSocialUrl(member, 'Instagram')">
+              <a [href]="getSocialUrl(member, 'Instagram')" target="_blank">
+                <lucide-angular [img]="Instagram" size="16" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  
