@@ -12,11 +12,12 @@ import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastService } from '../../core/services/toast.service';
+import { HomeButtonComponent } from '../../shared/components/home-button.component';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, HomeButtonComponent],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
