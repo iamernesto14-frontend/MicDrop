@@ -30,6 +30,7 @@ export class HomePageComponent implements OnInit {
   ];
 
   episodes: Episode[] = [];
+  currentYear = new Date().getFullYear();
   loading = true;
   error = '';
 
