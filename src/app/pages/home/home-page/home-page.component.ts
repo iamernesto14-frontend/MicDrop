@@ -7,7 +7,7 @@ import { EpisodeService } from '../../../core/services/episode.service';
 import { EpisodeCardComponent } from '../../../shared/components/episode-card/episode-card.component';
 import { Episode } from '../../../models/episode.model';
 import { CommonModule } from '@angular/common';
-
+import { RouterLink } from '@angular/router';
 import { TeamService } from '../../../core/services/team.service';
 import { TeamMember } from '../../../models/team-member.model';
 import { TeamPreviewComponent } from '../../../shared/components/team-preview/team-preview.component';
@@ -23,7 +23,7 @@ import { TeamPreviewComponent } from '../../../shared/components/team-preview/te
     EpisodeCardComponent,
     CommonModule,
     TeamPreviewComponent,
-    
+    RouterLink
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
