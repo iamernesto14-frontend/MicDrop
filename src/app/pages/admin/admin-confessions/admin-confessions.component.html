@@ -1,1 +1,42 @@
-<p>admin-confessions works!</p>
+<div class="admin-confessions">
+  <h2>Admin Confessions</h2>
+
+  <div class="toolbar">
+    <input type="text" placeholder="Search confessions..." [(ngModel)]="filter" />
+    <select [(ngModel)]="selectedStatus" (change)="fetchConfessions()">
+      <option value="all">All</option>
+      <option value="approved">Approved</option>
+      <option value="pending">Pending</option>
+    </select>
+
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th><input type="checkbox" (change)="toggleAll($event)" /></th>
+        <th>Content</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let confession of filteredConfessions">
+        <td><input type="checkbox" [checked]="selected.includes(confession.id)" (change)="toggleSelection(confession.id)" /></td>
+        <td>{{ confession.message }}</td>
+        <td>
+          <span [ngClass]="getStatusLabel(confession)">
+            {{ getStatusLabel(confession) }}
+          </span>
+        </td>
+        <td>{{ confession.created_at | date: 'yyyy-MM-dd' }}</td>
+        <td class="actions">
+          <button (click)="setStatus(confession.id, true)"><lucide-angular [img]="CircleCheckBig" size="20" strokeWidth="2" /></button>
+          <button (click)="setStatus(confession.id, false)"><lucide-angular [img]="CircleX" size="20" strokeWidth="2" /></button>
+          <button (click)="deleteConfession(confession.id)"><lucide-angular [img]="Trash2" size="20" strokeWidth="2" /></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
