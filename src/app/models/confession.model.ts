@@ -7,3 +7,9 @@ export interface Confession {
   created_at: string; 
   updated_at: string;
 }
+
+export interface ConfessionSubmission {
+  message: string;
+  category: string;
+  emotion: string;
+}

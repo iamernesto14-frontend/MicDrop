@@ -1,35 +1,45 @@
-<h2>All Anonymous Confessions</h2>
+<section class="admin-confessions">
+  <h2>All Anonymous Confessions👩🏽‍💻</h2>
 
-<div *ngIf="isLoading">Loading confessions...</div>
-<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  <div *ngIf="isLoading" class="loader">Loading confessions...</div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
-<table *ngIf="!isLoading && confessions.length > 0" class="confession-table">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Message</th>
-      <th>Category</th>
-      <th>Emotion</th>
-      <th>Status</th>
-      <th>Date Submitted</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let confession of confessions; index as i">
-      <td>{{ i + 1 }}</td>
-      <td>{{ confession.message }}</td>
-      <td>{{ confession.category }}</td>
-      <td>{{ confession.emotion }}</td>
-      <td>
-        <span [class.approved]="confession.is_approved" [class.pending]="!confession.is_approved">
-          {{ confession.is_approved ? 'Approved' : 'Pending' }}
-        </span>
-      </td>
-      <td>{{ confession.created_at | date: 'medium' }}</td>
-    </tr>
-  </tbody>
-</table>
+  <div *ngIf="!isLoading && confessions.length === 0" class="empty-message">
+    No confessions found.
+  </div>
 
-<div *ngIf="!isLoading && confessions.length === 0">
-  No confessions found.
-</div>
+  <div *ngIf="!isLoading && confessions.length > 0" class="confession-table-wrapper">
+    <table class="confession-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Message</th>
+          <th>Category</th>
+          <th>Emotion</th>
+          <th>Status</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let confession of confessions; index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ confession.message }}</td>
+          <td>{{ confession.category }}</td>
+          <td>{{ confession.emotion }}</td>
+          <td>
+            <span
+              class="status-badge"
+              [ngClass]="{
+                approved: confession.is_approved,
+                pending: !confession.is_approved
+              }"
+            >
+              {{ confession.is_approved ? 'Approved' : 'Pending' }}
+            </span>
+          </td>
+          <td>{{ confession.created_at | date: 'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

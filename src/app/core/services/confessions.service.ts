@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { ConfessionResponse } from '../../models/confession-response.model';
+import { ConfessionSubmission } from '../../models/confession.model';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -11,8 +12,8 @@ import { map } from 'rxjs/operators';
 export class ConfessionsService {
   constructor(private http: HttpClient) {}
 
-  submitConfession(message: string): Observable<any> {
-    const body = { message };
+  submitConfession(data: ConfessionSubmission): Observable<any> {
+    const body = data;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http.post(`${environment.apiUrl}/confessions`, body, { headers });

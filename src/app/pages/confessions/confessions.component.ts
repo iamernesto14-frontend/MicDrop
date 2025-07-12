@@ -5,6 +5,7 @@ import { HeaderComponent } from '../../shared/components/header/header.component
 import { Home, MessageSquare, List, Users, Play } from 'lucide-angular';
 import { MobileAdminMenuComponent } from '../../shared/components/mobile-admin-menu/mobile-admin-menu.component';
 import { ConfessionsService } from '../../core/services/confessions.service';
+import { ToastService } from '../../core/services/toast.service';
 
 @Component({
   selector: 'app-confession',
@@ -24,9 +25,11 @@ export class ConfessionComponent {
     { label: 'Confess', icon: MessageSquare, route: ['/confessions'] },
   ];
 
-  constructor(private fb: FormBuilder, private confessionsService: ConfessionsService) {
+  constructor(private fb: FormBuilder, private confessionsService: ConfessionsService, private toastService: ToastService) {
     this.confessionForm = this.fb.group({
-      message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500), this.noWordsValidator]]
+      message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500), this.noWordsValidator]],
+      category: ['', Validators.required],
+      emotion: ['', Validators.required]
     });
   }
 
@@ -39,9 +42,9 @@ export class ConfessionComponent {
   onSubmit() {
   if (this.confessionForm.valid) {
     this.isSubmitting = true;
-    const message = this.confessionForm.value.message;
+    const { message, category, emotion } = this.confessionForm.value;
 
-    this.confessionsService.submitConfession(message).subscribe({
+    this.confessionsService.submitConfession({ message, category, emotion }).subscribe({
       next: () => {
         this.isSubmitting = false;
         this.showConfirmation = true;
@@ -54,7 +57,8 @@ export class ConfessionComponent {
       error: (err) => {
         this.isSubmitting = false;
         console.error('Error:', err);
-        alert('An error occurred. Please try again later.');
+        const msg = err.error?.message || 'Submission failed. Please try again.';
+        this.toastService.show(msg, 'error');
       }
     });
   }
