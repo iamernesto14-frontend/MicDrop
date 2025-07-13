@@ -6,19 +6,65 @@
 ></app-mobile-admin-menu>
 
 <section class="page-header">
-  <h2>All Playlists</h2>
-  <p>Explore curated audio journeys and themes.</p>
+  <div class="header-content">
+    <h2> Discover Playlists</h2>
+    <p>Explore curated audio journeys and themes crafted just for you</p>
+  </div>
+  
+  <div class="search-section" *ngIf="!loading">
+    <div class="search-bar">
+      <input 
+        type="text" 
+        placeholder="Search playlists..." 
+        [(ngModel)]="searchTerm" 
+        (input)="filterPlaylists()">
+      <span class="search-icon">🔍</span>
+    </div>
+  </div>
 </section>
 
-<div *ngIf="loading" class="loading">Loading playlists...</div>
-<div *ngIf="error" class="error">{{ error }}</div>
+<div *ngIf="loading" class="loading">
+  <div class="loading-spinner"></div>
+  <p>Loading amazing playlists...</p>
+</div>
 
-<section class="playlists-grid" *ngIf="!loading && playlists.length">
-  <div class="playlist-card" *ngFor="let playlist of playlists">
-    <div class="card-content">
-      <h3>{{ playlist.name }}</h3>
-      <p>{{ playlist.description }}</p>
-      <span>{{ playlist.episodes.length }} episodes</span>
+<div *ngIf="error" class="error">
+  <span class="error-icon">⚠️</span>
+  {{ error }}
+</div>
+
+<div *ngIf="!loading && playlists.length === 0 && !error" class="empty-state">
+  <span class="empty-icon">🎵</span>
+  <h3>No playlists found</h3>
+  <p>Check back later for new curated content!</p>
+</div>
+
+<section class="playlists-container" *ngIf="!loading && filteredPlaylists.length">
+  <div class="playlists-stats">
+    <span>{{ filteredPlaylists.length }} playlist{{ filteredPlaylists.length !== 1 ? 's' : '' }} available</span>
+  </div>
+  
+  <div class="playlists-grid">
+    <div class="playlist-card" *ngFor="let playlist of filteredPlaylists; trackBy: trackByPlaylist">
+      <div class="card-header">
+        <div class="playlist-cover">
+          <span class="cover-icon">🎧</span>
+        </div>
+        <div class="playlist-meta">
+          <span class="episode-count">{{ playlist.episodes.length }} episodes</span>
+        </div>
+      </div>
+      
+      <div class="card-content">
+        <h3>{{ playlist.name }}</h3>
+        <p>{{ playlist.description }}</p>
+      </div>
+      
+      <div class="card-footer">
+        <span class="created-date" *ngIf="playlist.created_at">
+          {{ playlist.created_at | date:'MMM d, y' }}
+        </span>
+      </div>
     </div>
   </div>
 </section>

@@ -41,5 +41,25 @@
         </tr>
       </tbody>
     </table>
+    
+    <div class="pagination" *ngIf="totalPages > 1">
+      <button 
+        class="pagination-btn" 
+        [disabled]="currentPage === 1" 
+        (click)="prevPage()">
+        Previous
+      </button>
+      
+      <span class="pagination-info">
+        Page {{ currentPage }} of {{ totalPages }} ({{ totalItems }} total)
+      </span>
+      
+      <button 
+        class="pagination-btn" 
+        [disabled]="currentPage === totalPages" 
+        (click)="nextPage()">
+        Next
+      </button>
+    </div>
   </div>
 </section>

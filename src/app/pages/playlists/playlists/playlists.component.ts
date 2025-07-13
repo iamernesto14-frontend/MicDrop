@@ -4,6 +4,7 @@ import { MobileAdminMenuComponent } from '../../../shared/components/mobile-admi
 import { PlaylistService } from '../../../core/services/playlist.service';
 import { Playlist } from '../../../models/playlist.model';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-playlists',
@@ -12,14 +13,17 @@ import { CommonModule } from '@angular/common';
     HeaderComponent,
     MobileAdminMenuComponent,
     CommonModule,
+    FormsModule,
   ],
   templateUrl: './playlists.component.html',
   styleUrl: './playlists.component.scss',
 })
 export class PlaylistsComponent implements OnInit {
   playlists: Playlist[] = [];
+  filteredPlaylists: Playlist[] = [];
   loading = true;
   error = '';
+  searchTerm = '';
 
   menuItems = [
     { label: 'Home', icon: 'home', route: ['/'] },
@@ -34,6 +38,7 @@ export class PlaylistsComponent implements OnInit {
     this.playlistService.getPlaylists().subscribe({
       next: (res) => {
         this.playlists = res.data?.data || res.data || [];
+        this.filteredPlaylists = [...this.playlists];
         this.loading = false;
       },
       error: () => {
@@ -41,5 +46,22 @@ export class PlaylistsComponent implements OnInit {
         this.loading = false;
       },
     });
+  }
+
+  filterPlaylists(): void {
+    if (!this.searchTerm.trim()) {
+      this.filteredPlaylists = [...this.playlists];
+      return;
+    }
+    
+    const term = this.searchTerm.toLowerCase();
+    this.filteredPlaylists = this.playlists.filter(playlist => 
+      playlist.name.toLowerCase().includes(term) || 
+      playlist.description.toLowerCase().includes(term)
+    );
+  }
+
+  trackByPlaylist(index: number, playlist: Playlist): number {
+    return playlist.id;
   }
 }
