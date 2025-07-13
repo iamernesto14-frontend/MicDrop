@@ -24,7 +24,7 @@ export class PlaylistService {
     return this.http.put<Playlist>(`${this.apiUrl}/${id}`, data);
   }
 
-  deletePlaylist(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+  deletePlaylist(id: number): Observable<Playlist> {
+    return this.http.delete<Playlist>(`${this.apiUrl}/${id}`);
   }
 }

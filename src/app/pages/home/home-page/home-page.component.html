@@ -34,6 +34,21 @@
   </div>
 </section>
 
+<section class="featured-playlists" *ngIf="featuredPlaylists.length">
+  <div class="page-title">
+    <h2>Featured Playlists</h2>
+    <p>Curated collections for your journey</p>
+  </div>
+  <div class="playlists-grid">
+    <div class="playlist-card" *ngFor="let playlist of featuredPlaylists">
+      <h3>{{ playlist.name }}</h3>
+      <p>{{ playlist.description }}</p>
+      <span>{{ playlist.episodes.length }} episodes</span>
+    </div>
+  </div>
+</section>
+
+
 <div *ngIf="loading" class="loading-container">
   <div class="loading-text">Loading episodes...</div>
 </div>

@@ -61,9 +61,11 @@ export class AdminPlaylistsComponent {
   }
 
   onFormSubmitted(): void {
-    this.toggleForm();
-    this.loadPlaylists();
-  }
+  this.showForm = false;
+  this.editingPlaylist = undefined;
+  this.loadPlaylists();
+}
+
 
   editPlaylist(playlist: Playlist): void {
     this.editingPlaylist = playlist;

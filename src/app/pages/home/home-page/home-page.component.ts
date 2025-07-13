@@ -11,6 +11,8 @@ import { RouterLink } from '@angular/router';
 import { TeamService } from '../../../core/services/team.service';
 import { TeamMember } from '../../../models/team-member.model';
 import { TeamPreviewComponent } from '../../../shared/components/team-preview/team-preview.component';
+import { PlaylistService } from '../../../core/services/playlist.service';
+import { Playlist } from '../../../models/playlist.model';
 
 
 @Component({
@@ -38,11 +40,12 @@ export class HomePageComponent implements OnInit {
 
   teamMembers: TeamMember[] = [];
   episodes: Episode[] = [];
+  featuredPlaylists: Playlist[] = [];
   currentYear = new Date().getFullYear();
   loading = true;
   error = '';
 
-  constructor(private episodeService: EpisodeService, private teamService: TeamService) {}
+  constructor(private episodeService: EpisodeService, private teamService: TeamService, private playlistService: PlaylistService) { }
   
   ngOnInit(): void {
     this.episodeService.getLatestEpisodes(4).subscribe({
@@ -63,6 +66,13 @@ export class HomePageComponent implements OnInit {
       error: () => {
         console.error('Failed to load team members');
       },
+    });
+
+    this.playlistService.getPlaylists().subscribe({
+      next: (res) => {
+        this.featuredPlaylists = res.data?.data.slice(0, 4) || [];
+      },
+      error: () => console.error('Failed to load playlists'),
     });
   }
   
