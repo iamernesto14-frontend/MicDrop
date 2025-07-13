@@ -19,6 +19,7 @@
       font-size: clamp(2.5rem, 6vw, 4rem);
       font-weight: 800;
       margin-bottom: 1.25rem;
+      color: white;
 
       span {
         color: #e0e0ff;
@@ -44,7 +45,7 @@
         gap: 0.5rem;
         padding: 0.75rem 1.5rem;
         font-size: 1rem;
-        border-radius: var(--radius-md);
+        border-radius: var(--radius-sm);
         cursor: pointer;
         transition: background-color 0.3s ease;
       }

@@ -20,9 +20,9 @@ export const routes: Routes = [
   },
   {
     path: 'confessions',
-    loadChildren: () =>
-      import('./pages/confessions/confessions.routes').then(
-        (m) => m.CONFESSIONS_ROUTES,
+    loadComponent: () =>
+      import('./pages/confessions/confessions.component').then(
+        (m) => m.ConfessionComponent,
       ),
   },
   {

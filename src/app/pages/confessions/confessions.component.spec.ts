@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConfessionComponent } from './confession.component';
+import { ConfessionComponent } from './confessions.component';
 
 describe('ConfessionComponent', () => {
   let component: ConfessionComponent;

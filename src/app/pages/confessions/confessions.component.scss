@@ -1,5 +1,5 @@
-@use "../../../../styles/variables" as *;
-@use "../../../../styles/mixins" as *;
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
 
 .confession-container {
   max-width: 600px;
@@ -172,5 +172,47 @@
   
   .confession-header h1 {
     font-size: 2.5rem;
+  }
+}
+
+.form-row {
+  display: flex;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+
+  .form-group {
+    flex: 1;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: all 0.2s ease;
+  appearance: none;
+
+  &:focus {
+    border-color: var(--primary-solid);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+  }
+
+  &.error {
+    border-color: var(--destructive);
+  }
+
+  option {
+    background-color: var(--card);
+    color: var(--foreground);
   }
 }

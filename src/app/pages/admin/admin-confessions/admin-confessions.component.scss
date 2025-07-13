@@ -1,0 +1,86 @@
+@use '../../../../styles/mixins' as *;
+
+.admin-confessions {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--foreground);
+  }
+
+  .confession-table-wrapper {
+    overflow-x: auto;
+    border-radius: var(--radius-lg);
+    @include card-base;
+    padding: 1rem;
+  }
+
+  .confession-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+
+    thead {
+      background-color: var(--background-secondary);
+      color: var(--foreground);
+
+      th {
+        text-align: left;
+        padding: 0.75rem 1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid var(--border);
+        transition: background-color 0.2s ease;
+
+        &:hover {
+          background-color: var(--background-secondary);
+        }
+
+        td {
+          padding: 0.75rem 1rem;
+          color: var(--foreground);
+          vertical-align: top;
+        }
+      }
+    }
+  }
+
+  .status-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.75rem;
+    display: inline-block;
+    width: fit-content;
+    text-transform: uppercase;
+
+    &.approved {
+      background-color: rgba(76, 175, 80, 0.15);
+      color: hsl(142, 76%, 36%); // matches --accent-solid
+    }
+
+    &.pending {
+      background-color: rgba(255, 152, 0, 0.15);
+      color: hsl(31, 100%, 50%); // warm tone for pending
+    }
+  }
+
+  .loader,
+  .error-message,
+  .empty-message {
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 1rem;
+    color: var(--muted-foreground);
+  }
+}
