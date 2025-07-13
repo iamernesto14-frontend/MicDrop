@@ -274,3 +274,92 @@
     gap: 1rem;
   }
 }
+
+
+// =======================
+// Featured Playlists Section
+// =======================
+
+.featured-playlists {
+  padding: 4rem 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  .page-title {
+    margin-bottom: 2.5rem;
+    text-align: center;
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    p {
+      font-size: 1.125rem;
+      color: var(--muted-foreground);
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto;
+
+      @media (min-width: 768px) {
+        font-size: 1.25rem;
+      }
+    }
+  }
+
+  .playlists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .playlist-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    color: var(--foreground);
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--foreground);
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: var(--muted-foreground);
+      margin-bottom: 1rem;
+    }
+
+    span {
+      font-size: 0.85rem;
+      color: var(--muted-foreground);
+      display: block;
+    }
+  }
+
+  @media (min-width: 768px) {
+    padding: 5rem 2rem;
+  }
+
+  @media (min-width: 1200px) {
+    padding: 6rem 4rem;
+  }
+}

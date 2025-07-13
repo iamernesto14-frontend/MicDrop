@@ -1,124 +1,178 @@
 @use "../../../../styles/variables" as *;
 @use "../../../../styles/mixins" as *;
 
-.team-container {
+:host {
+  display: block;
   padding: 2rem;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
 
-  .header {
+.playlist-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 2rem;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--foreground);
+  }
+
+  p {
+    color: var(--muted-foreground);
+    font-size: 0.95rem;
+  }
+
+  .add-btn {
+    align-self: flex-end;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 500;
+    cursor: pointer;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    gap: 0.5rem;
+    transition: background 0.3s ease;
 
-    .header-content {
-      h2 {
-        font-size: 1.5rem;
-        color: var(--foreground);
-      }
-
-      p {
-        color: var(--muted-foreground);
-        font-size: 0.95rem;
-      }
-    }
-
-    .add-btn {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      background-color: #10b981;
-      color: white;
-      padding: 0.6rem 1rem;
-      border: none;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      font-weight: 600;
-
-      &:hover {
-        background-color: #059669;
-      }
+    &:hover {
+      background: var(--primary-hover);
     }
   }
+}
 
-  .team-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
+.playlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.playlist-card {
+  background: linear-gradient(
+    135deg,
+    rgba(var(--primary-rgb), 0.12),
+    rgba(var(--muted-rgb), 0.18)
+  );
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 1;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    background: var(--gradient-primary);
   }
 
-  .team-card {
-    background-color: var(--card-background);
-    padding: 1.5rem;
-    border-radius: 0.75rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  .card-body {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
     flex-direction: column;
+    gap: 0.75rem;
+    
 
-    .card-content {
-      margin-bottom: 1rem;
+    h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--card-foreground);
+    }
 
-      h3 {
-        font-size: 1.2rem;
-        margin-bottom: 0.5rem;
-        color: var(--foreground);
-      }
+    p {
+      font-size: 0.95rem;
+      color: var(--muted-foreground);
+    }
 
-      p {
-        font-size: 0.95rem;
-        color: var(--muted-foreground);
-        margin-bottom: 0.25rem;
-      }
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--muted-foreground);
+      margin-top: 0.25rem;
     }
 
     .card-actions {
       display: flex;
-      gap: 0.5rem;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      margin-top: 1rem;
 
-      .icon-btn {
-        background-color: transparent;
+      button {
+        background: none;
         border: none;
+        color: var(--muted-foreground);
+        font-size: 1.1rem;
         cursor: pointer;
-        padding: 0.4rem;
-        border-radius: 0.4rem;
-        transition: background-color 0.2s;
+        transition: color 0.2s ease;
 
-        &.pen:hover {
-          background-color: #facc15;
-        }
-
-        &.trash:hover {
-          background-color: #f87171;
+        &:hover {
+          color: var(--foreground);
         }
       }
     }
   }
+}
 
-  .drawer {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 100%;
-    max-width: 480px;
-    height: 100vh;
-    background-color: white;
-    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.05);
-    transition: right 0.3s ease-in-out;
-    z-index: 1000;
+.playlist-form-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+  animation: fadeInBackdrop 0.3s ease forwards;
+}
 
-    &.open {
-      right: 0;
-    }
+.playlist-form-modal {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 95%;
+  max-width: 500px;
+  animation: slideInUp 0.4s ease forwards;
+
+  @media (min-width: 640px) {
+    max-width: 600px;
   }
+}
 
-  .backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 999;
+.confirm-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+}
+
+
+// Animations
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInBackdrop {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

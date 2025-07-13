@@ -1,6 +1,24 @@
 <app-header></app-header>
-<p>playlists works!</p>
+
 <app-mobile-admin-menu
   class="scroll-aware-menu"
   [menuItems]="menuItems"
 ></app-mobile-admin-menu>
+
+<section class="page-header">
+  <h2>All Playlists</h2>
+  <p>Explore curated audio journeys and themes.</p>
+</section>
+
+<div *ngIf="loading" class="loading">Loading playlists...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<section class="playlists-grid" *ngIf="!loading && playlists.length">
+  <div class="playlist-card" *ngFor="let playlist of playlists">
+    <div class="card-content">
+      <h3>{{ playlist.name }}</h3>
+      <p>{{ playlist.description }}</p>
+      <span>{{ playlist.episodes.length }} episodes</span>
+    </div>
+  </div>
+</section>

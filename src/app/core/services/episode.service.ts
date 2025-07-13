@@ -25,7 +25,6 @@ export class EpisodeService {
       return of(found);
     }
 
-    // Fetch all episodes (you can limit page size as needed)
     return this.getEpisodes().pipe(
       map((res) => {
         const sorted = res.data.sort(
@@ -54,7 +53,6 @@ export class EpisodeService {
     const url = `${this.baseUrl}?page=1&limit=${limit}`;
     return this.http.get<{ status: string; data: Episode[] }>(url).pipe(
       map((res) => {
-        // Optionally sort by createdAt if backend doesn't do it
         const sorted = res.data.sort(
           (a, b) =>
             new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
@@ -65,19 +63,19 @@ export class EpisodeService {
     );
   }
 
-  addEpisode(episode: any): Observable<any> {
+  addEpisode(episode: Partial<Episode>): Observable<Episode> {
     this.clearCache();
-    return this.http.post(this.baseUrl, episode);
+    return this.http.post<Episode>(this.baseUrl, episode);
   }
 
-  updateEpisode(id: number, data: any): Observable<any> {
+  updateEpisode(id: number, data: Partial<Episode>): Observable<Episode> {
     this.clearCache();
-    return this.http.put(`${this.baseUrl}/${id}`, data);
+    return this.http.put<Episode>(`${this.baseUrl}/${id}`, data);
   }
 
-  deleteEpisode(id: number): Observable<any> {
+  deleteEpisode(id: number): Observable<{}> {
     this.clearCache();
-    return this.http.delete(`${this.baseUrl}/${id}`);
+    return this.http.delete<{}>(`${this.baseUrl}/${id}`);
   }
 
   private clearCache(): void {

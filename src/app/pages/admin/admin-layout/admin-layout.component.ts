@@ -1,6 +1,5 @@
 import { Component, HostListener } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { AdminToolbarComponent } from '../admin-toolbar/admin-toolbar.component';
 import { SidebarComponent } from '../../../shared/components/sidebar/sidebar.component';
 import { MobileAdminMenuComponent } from '../../../shared/components/mobile-admin-menu/mobile-admin-menu.component';
 import { CommonModule } from '@angular/common';

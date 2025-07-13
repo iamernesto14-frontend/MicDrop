@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable, tap } from 'rxjs';
 import { LoginResponse } from '../../models/auth.model';
+import { User } from '../../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -16,8 +17,8 @@ export class AuthService {
     password: string;
     password_confirmation: string;
     role: string;
-  }): Observable<any> {
-    return this.http.post(`${this.baseUrl}/register`, data);
+  }): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.baseUrl}/register`, data);
   }
 
   login(credentials: {
@@ -50,7 +51,7 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  getUser(): any {
+  getUser(): User | null {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   }
