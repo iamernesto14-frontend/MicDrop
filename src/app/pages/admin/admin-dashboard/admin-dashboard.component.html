@@ -8,7 +8,7 @@
 <section class="dashboard-stats">
   <div class="stat-card blue">
     <h3>Total Confessions</h3>
-    <p class="count">47</p>
+    <p class="count">{{ confessionCount }}</p>
     <span class="change">+12 this month</span>
   </div>
   <div class="stat-card green">
@@ -18,7 +18,7 @@
     </div>
   <div class="stat-card purple">
     <h3>Playlists</h3>
-    <p class="count">8</p>
+    <p class="count">{{ playlistCount }}</p>
     <span class="change">+1 this month</span>
   </div>
   <div class="stat-card orange">
@@ -64,11 +64,8 @@
   <div class="quick-actions">
     <h3>Quick Actions</h3>
     <div class="action-grid">
-      <!-- route to confessions -->
       <button routerLink="/admin/confessions">View Confessions</button>
-      <!-- route to playlists -->
       <button routerLink="/admin/playlists">Manage Playlists</button>
-      <!-- route to team -->
       <button routerLink="/admin/team">Team Settings</button>
       <button>View Site</button>
     </div>

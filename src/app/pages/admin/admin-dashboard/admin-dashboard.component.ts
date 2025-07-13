@@ -5,6 +5,10 @@ import { TeamService } from '../../../core/services/team.service';
 import { EpisodeService } from '../../../core/services/episode.service';
 import { TeamMember } from '../../../models/team-member.model';
 import { Episode } from '../../../models/episode.model';
+import { Confession } from '../../../models/confession.model';
+import { Playlist } from '../../../models/playlist.model';
+import { PlaylistService } from '../../../core/services/playlist.service';
+import { ConfessionsService } from '../../../core/services/confessions.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -17,11 +21,15 @@ export class AdminDashboardComponent implements OnInit {
   userName: string = '';
   teamMembers: TeamMember[] = [];
   episodes: Episode[] = [];
+  confession: Confession[] = [];
+  playlists: Playlist[] = [];
 
   constructor(
     private authService: AuthService,
     private teamService: TeamService,
-    private episodeService: EpisodeService
+    private episodeService: EpisodeService,
+    private confessionService: ConfessionsService,
+    private playlistService: PlaylistService
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +38,8 @@ export class AdminDashboardComponent implements OnInit {
 
     this.loadTeamMembers();
     this.loadEpisodes();
+    this.loadConfessions();
+    this.loadPlaylists();
   }
 
   private loadTeamMembers(): void {
@@ -51,6 +61,28 @@ export class AdminDashboardComponent implements OnInit {
       error: (err) => {
         console.error('Failed to load episodes', err);
       },
+    });  
+  }
+
+  private loadConfessions(): void {
+    this.confessionService.getAllConfessions(1).subscribe({
+      next: (res) => {
+        this.confession = res.data;
+      },
+      error: (err) => {
+        console.error('Failed to load confessions', err);
+      },
+    });  
+  }
+
+  private loadPlaylists(): void {
+    this.playlistService.getPlaylists().subscribe({
+      next: (res) => {
+        this.playlists = res.data?.data || [];
+      },
+      error: (err) => {
+        console.error('Failed to load playlists', err);
+      },
     });
   }
 
@@ -60,5 +92,13 @@ export class AdminDashboardComponent implements OnInit {
 
   get episodeCount(): number {
     return this.episodes.length;
+  }
+
+  get confessionCount(): number {
+    return this.confession.length;
+  }
+
+  get playlistCount(): number {
+    return this.playlists.length;
   }
 }

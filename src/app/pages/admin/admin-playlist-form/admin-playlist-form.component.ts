@@ -2,8 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PlaylistService } from '../../../core/services/playlist.service';
 import { Playlist } from '../../../models/playlist.model';
+import { Episode } from '../../../models/episode.model';
 import { EpisodeService } from '../../../core/services/episode.service';
-import { ToastService } from '../../../core/services/toast.service'; // ✅ ADD THIS
+import { ToastService } from '../../../core/services/toast.service'; 
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -31,20 +32,20 @@ export class AdminPlaylistFormComponent implements OnInit {
   @Output() submitted = new EventEmitter<void>();
 
   form!: FormGroup;
-  episodes: any[] = [];
+  episodes: Episode[] = [];
 
   constructor(
     private fb: FormBuilder,
     private playlistService: PlaylistService,
     private episodeService: EpisodeService,
-    private toastService: ToastService // ✅ Inject toast service
+    private toastService: ToastService 
   ) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
       name: [this.playlist?.name || '', Validators.required],
       description: [this.playlist?.description || '', Validators.required],
-      episodes: [this.playlist?.episodes || []], // for display only
+      episodes: [this.playlist?.episodes || []], 
     });
 
     this.loadEpisodes();

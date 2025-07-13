@@ -70,7 +70,7 @@ export class HomePageComponent implements OnInit {
 
     this.playlistService.getPlaylists().subscribe({
       next: (res) => {
-        this.featuredPlaylists = res.data?.data.slice(0, 3) || [];
+        this.featuredPlaylists = res.data?.data.slice(0, 4) || [];
       },
       error: () => console.error('Failed to load playlists'),
     });
