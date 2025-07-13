@@ -1,82 +1,100 @@
-// admin-playlist-form.component.ts
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PlaylistService } from '../../../core/services/playlist.service';
+import { Playlist } from '../../../models/playlist.model';
+import { EpisodeService } from '../../../core/services/episode.service';
+import { ToastService } from '../../../core/services/toast.service'; // ✅ ADD THIS
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import { Playlist } from '../../../models/playlist.model';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-playlist-form',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './admin-playlist-form.component.html',
   styleUrls: ['./admin-playlist-form.component.scss'],
 })
-export class AdminPlaylistFormComponent {
-  @Input() playlist: Playlist | null = null;
+export class AdminPlaylistFormComponent implements OnInit {
+  @Input() playlist?: Playlist;
   @Output() submitted = new EventEmitter<void>();
 
-  playlistForm: FormGroup;
+  form!: FormGroup;
   episodes: any[] = [];
 
   constructor(
     private fb: FormBuilder,
     private playlistService: PlaylistService,
-  ) {
-    this.playlistForm = this.fb.group({
-      title: ['', Validators.required],
-      description: [''],
-      episodes: [[]],
-    });
-  }
+    private episodeService: EpisodeService,
+    private toastService: ToastService // ✅ Inject toast service
+  ) {}
 
   ngOnInit(): void {
-    this.fetchEpisodes();
-    if (this.playlist) {
-      this.playlistForm.patchValue(this.playlist);
-    }
+    this.form = this.fb.group({
+      name: [this.playlist?.name || '', Validators.required],
+      description: [this.playlist?.description || '', Validators.required],
+      episodes: [this.playlist?.episodes || []], // for display only
+    });
+
+    this.loadEpisodes();
   }
 
-  fetchEpisodes(): void {
-    this.playlistService.getPlaylists().subscribe({
+  loadEpisodes(): void {
+    this.episodeService.getEpisodes().subscribe({
       next: (res) => {
-        this.episodes = res.data || [];
+        this.episodes = res.data || res;
       },
-      error: (err) => {
-        console.error('Failed to fetch episodes:', err);
-      },
+      error: (err) => console.error('Failed to load episodes', err),
     });
   }
 
   onSubmit(): void {
-    if (this.playlistForm.invalid) return;
+    if (this.form.invalid) return;
 
-    const action = this.playlist
-      ? this.playlistService.updatePlaylist(
-          this.playlist.id,
-          this.playlistForm.value,
-        )
-      : this.playlistService.createPlaylist(this.playlistForm.value);
+    const payload = {
+      name: this.form.value.name,
+      description: this.form.value.description,
+    };
 
-    action.subscribe({
-      next: () => this.submitted.emit(),
-      error: (err) => console.error('Failed to save playlist:', err),
-    });
+    if (this.playlist) {
+      this.playlistService.updatePlaylist(this.playlist.id, payload).subscribe({
+        next: () => {
+          this.toastService.show('Playlist updated successfully!', 'success');
+          this.submitted.emit();
+        },
+        error: (err) => {
+          console.error('Update Error:', err);
+          this.toastService.show(
+            err.error?.message || 'Failed to update playlist.',
+            'error'
+          );
+        },
+      });
+    } else {
+      this.playlistService.createPlaylist(payload).subscribe({
+        next: () => {
+          this.toastService.show('Playlist created successfully!', 'success');
+          this.submitted.emit();
+        },
+        error: (err) => {
+          console.error('Create Error:', err);
+          this.toastService.show(
+            err.error?.message || 'Failed to create playlist.',
+            'error'
+          );
+        },
+      });
+    }
   }
 }
