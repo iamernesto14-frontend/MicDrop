@@ -16,15 +16,15 @@ export class TeamService {
     return this.http.get<{ status: string; data: TeamMember[] }>(this.baseUrl);
   }
 
-  addTeamMember(member: any): Observable<any> {
-    return this.http.post(this.baseUrl, member);
+  addTeamMember(member: TeamMember): Observable<TeamMember> {
+    return this.http.post<TeamMember>(this.baseUrl, member);
   }
 
-  deleteTeamMember(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+  deleteTeamMember(id: number): Observable<TeamMember> {
+    return this.http.delete<TeamMember>(`${this.baseUrl}/${id}`);
   }
 
-  updateTeamMember(id: number, data: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, data);
+  updateTeamMember(id: number, data: TeamMember): Observable<TeamMember> {
+    return this.http.put<TeamMember>(`${this.baseUrl}/${id}`, data);
   }
 }

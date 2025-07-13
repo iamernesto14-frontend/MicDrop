@@ -47,7 +47,7 @@ export class AdminPlaylistsComponent {
   loadPlaylists(): void {
     this.playlistService.getPlaylists().subscribe({
       next: (res) => {
-        this.playlists = res.data?.data || [];
+        this.playlists = res.data || [];
       },
       error: (err) => {
         console.error('Error loading playlists:', err);
@@ -81,9 +81,7 @@ export class AdminPlaylistsComponent {
     this.playlistService.deletePlaylist(this.playlistToDelete.id).subscribe({
       next: () => {
         this.toastService.show('Playlist deleted successfully.', 'success');
-        this.playlists = this.playlists.filter(
-          (p) => p.id !== this.playlistToDelete?.id,
-        );
+        this.loadPlaylists();
         this.showConfirmModal = false;
         this.playlistToDelete = undefined;
       },

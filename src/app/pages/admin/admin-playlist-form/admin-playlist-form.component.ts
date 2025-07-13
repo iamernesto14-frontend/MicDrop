@@ -13,6 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { Playlist } from '../../../models/playlist.model';
+import { EpisodeService } from '../../../core/services/episode.service';
+import { Episode } from '../../../models/episode.model';
 
 @Component({
   selector: 'app-admin-playlist-form',
@@ -33,11 +35,12 @@ export class AdminPlaylistFormComponent {
   @Output() submitted = new EventEmitter<void>();
 
   playlistForm: FormGroup;
-  episodes: any[] = [];
+  episodes: Episode[] = [];
 
   constructor(
     private fb: FormBuilder,
     private playlistService: PlaylistService,
+    private episodeService: EpisodeService,
   ) {
     this.playlistForm = this.fb.group({
       title: ['', Validators.required],
@@ -54,7 +57,7 @@ export class AdminPlaylistFormComponent {
   }
 
   fetchEpisodes(): void {
-    this.playlistService.getPlaylists().subscribe({
+    this.episodeService.getEpisodes().subscribe({
       next: (res) => {
         this.episodes = res.data || [];
       },
