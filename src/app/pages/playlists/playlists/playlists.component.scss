@@ -1,3 +1,6 @@
+
+@use '../../../../styles/variables' as *;
+
 .scroll-aware-menu {
   position: fixed;
   bottom: 0;
@@ -23,3 +26,62 @@
     display: none;
   }
 }
+
+
+.page-header {
+  text-align: center;
+  margin: 2rem 0;
+
+  h2 {
+    font-size: 2rem;
+    color: var(--foreground);
+  }
+
+  p {
+    color: var(--muted-foreground);
+    font-size: 1rem;
+  }
+}
+
+.playlists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.playlist-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 1.5rem;
+  color: var(--foreground);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  border: 1px solid var(--muted-foreground);
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: var(--muted-foreground);
+  }
+
+  span {
+    font-size: 0.8rem;
+    display: block;
+    margin-top: 0.75rem;
+    color: var(--muted-foreground);
+  }
+}
+

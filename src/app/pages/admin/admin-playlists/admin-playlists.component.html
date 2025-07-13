@@ -8,34 +8,31 @@
 
 <div class="playlist-grid">
   <div class="playlist-card" *ngFor="let playlist of playlists">
-    <img
-      [src]="playlist.cover_image || 'https://via.placeholder.com/400x250'"
-      alt="Playlist Image"
-    />
-    <div class="card-body">
-      <h3>{{ playlist.name }}</h3>
-      <p>{{ playlist.description }}</p>
-      <div class="card-meta">
-        <span>{{ playlist.episodes.length }} Episodes</span>
-        <span>
-          Created:
-          {{
-            playlist.created_at
-              ? (playlist.created_at | date: 'yyyy-MM-dd')
-              : 'N/A'
-          }}
-        </span>
-      </div>
-      <div class="card-actions">
-        <button (click)="editPlaylist(playlist)">
-          <lucide-icon [img]="SquarePen"></lucide-icon>
-        </button>
-        <button (click)="confirmDelete(playlist)">
-          <lucide-icon [img]="Trash2"></lucide-icon>
-        </button>
-      </div>
+  <div class="card-body">
+    <h3>{{ playlist.name }}</h3>
+    <p>{{ playlist.description }}</p>
+    <div class="card-meta">
+      <span>{{ playlist.episodes.length }} Episodes</span>
+      <span>
+        Created:
+        {{
+          playlist.created_at
+            ? (playlist.created_at | date: 'yyyy-MM-dd')
+            : 'N/A'
+        }}
+      </span>
+    </div>
+    <div class="card-actions">
+      <button (click)="editPlaylist(playlist)">
+        <lucide-icon [img]="SquarePen"></lucide-icon>
+      </button>
+      <button (click)="confirmDelete(playlist)">
+        <lucide-icon [img]="Trash2"></lucide-icon>
+      </button>
     </div>
   </div>
+</div>
+
 </div>
 
 <div *ngIf="showForm" class="playlist-form-backdrop" (click)="toggleForm()">
