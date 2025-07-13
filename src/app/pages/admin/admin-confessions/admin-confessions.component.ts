@@ -22,7 +22,7 @@ export class AdminConfessionsComponent implements OnInit {
 
   loadConfessions(): void {
     
-    this.confessionService.getAllConfessions().subscribe({
+    this.confessionService.getAllConfessions(1).subscribe({
     next: (response) => {
       console.log('Confessions loaded:', response.data); 
       this.confessions = response.data; 

@@ -19,8 +19,8 @@ export class ConfessionsService {
     return this.http.post(`${environment.apiUrl}/confessions`, body, { headers });
   }
 
-  getAllConfessions(): Observable<ConfessionResponse> {
-    return this.http.get<ConfessionResponse>(`${environment.apiUrl}/confessions`).pipe(
+  getAllConfessions(page: number = 1): Observable<ConfessionResponse> {
+    return this.http.get<ConfessionResponse>(`${environment.apiUrl}/confessions?page=${page}`).pipe(
     );
   }
 }
