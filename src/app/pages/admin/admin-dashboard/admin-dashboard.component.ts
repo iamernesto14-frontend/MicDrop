@@ -5,6 +5,8 @@ import { TeamService } from '../../../core/services/team.service';
 import { EpisodeService } from '../../../core/services/episode.service';
 import { TeamMember } from '../../../models/team-member.model';
 import { Episode } from '../../../models/episode.model';
+import { Confession } from '../../../models/confession.model';
+import { ConfessionService } from '../../../core/services/confession.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -17,11 +19,13 @@ export class AdminDashboardComponent implements OnInit {
   userName: string = '';
   teamMembers: TeamMember[] = [];
   episodes: Episode[] = [];
+  confessions: Confession[] = [];
 
   constructor(
     private authService: AuthService,
     private teamService: TeamService,
-    private episodeService: EpisodeService
+    private episodeService: EpisodeService,
+    private confessionService: ConfessionService
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +34,7 @@ export class AdminDashboardComponent implements OnInit {
 
     this.loadTeamMembers();
     this.loadEpisodes();
+    this.loadConfessions();
   }
 
   private loadTeamMembers(): void {
@@ -54,11 +59,26 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
+  private loadConfessions(): void {
+    this.confessionService.getAll().subscribe({
+      next: (res) => {
+        this.confessions = res;
+      },
+      error: (err) => {
+        console.error('Failed to load confessions', err);
+      },
+    });
+  }
+
   get teamCount(): number {
     return this.teamMembers.length;
   }
 
   get episodeCount(): number {
     return this.episodes.length;
+  }
+
+  get confessionCount(): number {
+    return this.confessions.length;
   }
 }

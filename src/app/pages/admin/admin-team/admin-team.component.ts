@@ -57,7 +57,6 @@ export class AdminTeamComponent {
   loadTeam(): void {
     this.teamService.getTeamMembers().subscribe({
       next: (response) => {
-        console.log('Updated team fetched:', response);
         this.teamMembers = response.data;
       },
       error: (err) => {

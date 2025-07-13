@@ -58,7 +58,7 @@ export class HomePageComponent implements OnInit {
   
     this.teamService.getTeamMembers().subscribe({
       next: (res) => {
-        this.teamMembers = res.data.slice(0, 4); // Show only top 4 if needed
+        this.teamMembers = res.data; // Show only top 4 if needed
       },
       error: () => {
         console.error('Failed to load team members');

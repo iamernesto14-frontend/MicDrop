@@ -1,0 +1,86 @@
+.admin-confessions {
+  padding: 2rem;
+  background-color: var(--background);
+  color: var(--foreground);
+  min-height: 100vh;
+
+  h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    font-family: var(--font-display);
+  }
+
+  .toolbar {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+
+    input[type='text'],
+    select {
+      background-color: var(--input);
+      border: 1px solid var(--border);
+      color: var(--foreground);
+      padding: 0.5rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+    }
+
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--card);
+
+    th,
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--card-foreground);
+    }
+
+    span.approved {
+      background-color: hsl(142, 76%, 36%);
+      color: hsl(158, 64%, 85%);
+      padding: 0.25rem 0.5rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+    }
+
+    span.pending {
+      background-color: hsl(31, 100%, 30%);
+      color: hsl(45, 100%, 85%);
+      padding: 0.25rem 0.5rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+    }
+
+    span.rejected {
+      background-color: hsl(0, 84%, 20%);
+      color: hsl(0, 84%, 75%);
+      padding: 0.25rem 0.5rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      align-items: center;
+
+      button {
+        border: none;
+        background-color: transparent;
+        color: var(--muted-foreground);
+        cursor: pointer;
+        font-size: 0.75rem;
+
+        &:hover {
+          color: var(--foreground);
+        }
+      }
+    }
+  }
+}

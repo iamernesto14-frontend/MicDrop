@@ -2,19 +2,27 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl, ValidationErrors } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
-import { Home, MessageSquare, List, Users, Play } from 'lucide-angular';
+import { Home, MessageSquare, List, Play } from 'lucide-angular';
 import { MobileAdminMenuComponent } from '../../../shared/components/mobile-admin-menu/mobile-admin-menu.component';
+import { ConfessionService } from '../../../core/services/confession.service';
+import { ToastService } from '../../../core/services/toast.service';
+import { Confession } from '../../../models/confession.model';
+import { ToastComponent } from '../../../shared/components/toast/toast.component';
 
 @Component({
   selector: 'app-confession',
-  imports: [HeaderComponent, MobileAdminMenuComponent, ReactiveFormsModule, CommonModule],
+  standalone: true,
+  imports: [HeaderComponent, MobileAdminMenuComponent, ReactiveFormsModule, CommonModule, ToastComponent],
   templateUrl: './confession.component.html',
-  styleUrl: './confession.component.scss',
+  styleUrls: ['./confession.component.scss'],
 })
 export class ConfessionComponent {
   confessionForm: FormGroup;
   isSubmitting = false;
   showConfirmation = false;
+
+  categories = ['Funny', 'Serious', 'Sad', 'Happy', 'Other'];
+  emotions = ['Guilty', 'Happy', 'Sad', 'Angry', 'Neutral'];
 
   menuItems = [
     { label: 'Home', icon: Home, route: ['/'] },
@@ -23,9 +31,15 @@ export class ConfessionComponent {
     { label: 'Confess', icon: MessageSquare, route: ['/confessions'] },
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private confessionService: ConfessionService,
+    private toastService: ToastService
+  ) {
     this.confessionForm = this.fb.group({
-      message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500), this.noWordsValidator]]
+      message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500), this.noWordsValidator]],
+      category: ['', Validators.required],
+      emotion: ['', Validators.required],
     });
   }
 
@@ -38,22 +52,39 @@ export class ConfessionComponent {
   onSubmit() {
     if (this.confessionForm.valid) {
       this.isSubmitting = true;
-      
-      // Simulate API call
-      setTimeout(() => {
-        this.isSubmitting = false;
-        this.showConfirmation = true;
-        this.confessionForm.reset();
-        
-        // Hide confirmation after 3 seconds
-        setTimeout(() => {
-          this.showConfirmation = false;
-        }, 3000);
-      }, 1000);
+      const payload = this.confessionForm.value;
+
+      this.confessionService.submitConfession(payload).subscribe({
+        next: (response: { status: string; message: string; data: Confession }) => {
+          this.isSubmitting = false;
+          this.showConfirmation = true;
+          this.confessionForm.reset();
+          this.toastService.show(response.message, 'success'); // Use API message
+
+          setTimeout(() => {
+            this.showConfirmation = false;
+          }, 3000);
+        },
+        error: (err: any) => {
+          this.isSubmitting = false;
+          this.toastService.show(
+            err.error?.error || 'Failed to submit confession. Please try again.',
+            'error'
+          );
+        },
+      });
     }
   }
 
   get message() {
     return this.confessionForm.get('message');
+  }
+
+  get category() {
+    return this.confessionForm.get('category');
+  }
+
+  get emotion() {
+    return this.confessionForm.get('emotion');
   }
 }
